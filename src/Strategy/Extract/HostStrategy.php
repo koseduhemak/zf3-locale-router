@@ -13,7 +13,7 @@ class HostStrategy extends AbstractExtractStrategy
     private $domain;
     private $aliases;
 
-    public function setStrategyOptions($options = [])
+    public function setStrategyOptions(array $options = [])
     {
         if (array_key_exists('domain', $options)) {
             $this->domain = (string) $options['domain'];

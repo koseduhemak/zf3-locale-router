@@ -29,7 +29,7 @@ abstract class AbstractExtractStrategy implements ExtractStrategyInterface
      */
     abstract public function extractLocale(RequestInterface $request, $baseUrl);
 
-    public function setStrategyOptions($options = [])
+    public function setStrategyOptions(array $options = [])
     {
     }
 

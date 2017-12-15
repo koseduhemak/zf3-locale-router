@@ -17,7 +17,7 @@ class CookieStrategy extends AbstractExtractStrategy
      */
     protected $cookieName;
 
-    public function setOptions(array $options = [])
+    public function setStrategyOptions(array $options = [])
     {
         if (array_key_exists('cookie_name', $options)) {
             $this->setCookieName($options['cookie_name']);

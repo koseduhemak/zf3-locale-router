@@ -8,7 +8,7 @@ use Zend\Stdlib\RequestInterface;
 
 final class UriPathStrategy extends AbstractExtractStrategy
 {
-    public function setStrategyOptions($options = [])
+    public function setStrategyOptions(array $options = [])
     {
     }
 

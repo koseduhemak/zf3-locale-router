@@ -10,7 +10,7 @@ final class QueryStrategy extends AbstractExtractStrategy
     /** @var string */
     protected $paramName = 'lang';
 
-    public function setStrategyOptions($options = [])
+    public function setStrategyOptions(array $options = [])
     {
         if (array_key_exists('paramName', $options)) {
             $this->paramName = $options['paramName'];

@@ -21,6 +21,7 @@ class StrategyPluginManager extends AbstractPluginManager
             'extract-query'          => Extract\QueryStrategy::class,
             'extract-uripath'        => Extract\UriPathStrategy::class,
             'extract-asset'          => Extract\AssetStrategy::class,
+            'extract-useridentity'   => Extract\UserIdentityStrategy::class,
 
             // persist strategies
             'persist-doctrine'       => Persist\DoctrineStrategy::class,
@@ -38,6 +39,7 @@ class StrategyPluginManager extends AbstractPluginManager
             Extract\QueryStrategy::class              => AbstractExtractStrategyFactory::class,
             Extract\UriPathStrategy::class            => AbstractExtractStrategyFactory::class,
             Extract\AssetStrategy::class              => AbstractExtractStrategyFactory::class,
+            Extract\UserIdentityStrategy::class       => AbstractExtractStrategyFactory::class,
 
             // persist strategies
             Persist\DoctrineStrategy::class           => \LocaleRouter\Factory\Strategy\Persist\DoctrineStrategyFactory::class,

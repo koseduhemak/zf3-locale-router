@@ -41,7 +41,7 @@ use Zend\Stdlib\RequestInterface;
 final class AssetStrategy extends AbstractExtractStrategy
 {
     /** @var  array */
-    private $file_extensions = ['js', 'css'];
+    private $file_extensions = ['js', 'css', 'jpg', 'jpeg', 'gif', 'png'];
 
     public function extractLocale(RequestInterface $request, $baseUrl)
     {
@@ -58,7 +58,7 @@ final class AssetStrategy extends AbstractExtractStrategy
         return $result;
     }
 
-    public function setOptions(array $options = [])
+    public function setStrategyOptions(array $options = [])
     {
         if (array_key_exists('file_extensions', $options)) {
             $this->file_extensions = (array) $options['file_extensions'];
