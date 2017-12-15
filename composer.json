@@ -23,6 +23,11 @@
             "LocaleRouter\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "LocaleRouterTest\\": "tests/LocaleRouterTest/"
+        }
+    },
     "extra" : {
         "zf" : {
             "module" : "LocaleRouter"

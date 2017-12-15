@@ -1,4 +1,5 @@
 <?php
+
 namespace LocaleRouter\Factory\Mvc\Router\Http;
 
 use Interop\Container\ContainerInterface;
