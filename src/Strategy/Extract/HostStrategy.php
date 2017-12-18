@@ -30,12 +30,12 @@ class HostStrategy extends AbstractExtractStrategy
 
         $domain = $this->getDomain();
         if (! null === $domain) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'The strategy must be configured with a domain option'
             );
         }
         if (strpos($domain, self::LOCALE_KEY) === false) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 sprintf(
                     'The domain %s must contain a locale key part "%s"',
                     $domain, self::LOCALE_KEY

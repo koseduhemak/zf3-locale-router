@@ -1,4 +1,5 @@
 <?php
+
 namespace LocaleRouterTest;
 
 use LocaleRouter\Module;

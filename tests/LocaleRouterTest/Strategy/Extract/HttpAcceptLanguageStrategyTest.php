@@ -5,11 +5,9 @@ namespace LocaleRouterTest\Strategy\Extract;
 
 use LocaleRouter\Model\StrategyResultModel;
 use LocaleRouter\Options\LanguageOptions;
-use LocaleRouter\Strategy\Extract\CookieStrategy;
 use LocaleRouter\Strategy\Extract\HttpAcceptLanguageStrategy;
 use PHPUnit\Framework\TestCase;
 use Zend\Http\Header\AcceptLanguage;
-use Zend\Http\Header\Cookie;
 use Zend\Http\Request;
 
 class HttpAcceptLanguageStrategyTest extends TestCase

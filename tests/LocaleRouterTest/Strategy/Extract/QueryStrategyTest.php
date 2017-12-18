@@ -3,11 +3,9 @@
 
 namespace LocaleRouterTest\Strategy\Extract;
 
-
 use LocaleRouter\Model\StrategyResultModel;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Extract\QueryStrategy;
-use LocaleRouter\Strategy\Extract\UriPathStrategy;
 use PHPUnit\Framework\TestCase;
 use Zend\Http\Request;
 use Zend\Stdlib\Parameters;
@@ -20,7 +18,7 @@ class QueryStrategyTest extends TestCase
     public function setUp()
     {
         $languageOptions = new LanguageOptions();
-        $this->strategy = new QueryStrategy($languageOptions);
+        $this->strategy  = new QueryStrategy($languageOptions);
     }
 
     public function testLocaleDetection()
@@ -29,8 +27,8 @@ class QueryStrategyTest extends TestCase
         $request->setUri('http://www.example.com/de/test/test2?lang=en');
         $params = new Parameters(['lang' => 'en']);
         $request->setQuery($params);
-        $baseurl = "";
-        $locale = $this->strategy->extractLocale($request, $baseurl);
+        $baseurl = '';
+        $locale  = $this->strategy->extractLocale($request, $baseurl);
 
         $this->assertInstanceOf(StrategyResultModel::class, $locale);
         $this->assertEquals($locale->getLocale(), 'en_US');
@@ -39,8 +37,8 @@ class QueryStrategyTest extends TestCase
         $request->setUri('http://www.example.com/en/test/test2?lang=de');
         $params = new Parameters(['lang' => 'de']);
         $request->setQuery($params);
-        $baseurl = "";
-        $locale = $this->strategy->extractLocale($request, $baseurl);
+        $baseurl = '';
+        $locale  = $this->strategy->extractLocale($request, $baseurl);
 
         $this->assertInstanceOf(StrategyResultModel::class, $locale);
         $this->assertEquals($locale->getLocale(), 'de_DE');
@@ -52,8 +50,8 @@ class QueryStrategyTest extends TestCase
         $request->setUri('http://www.example.com/detest/test2?lang=asd');
         $params = new Parameters(['lang' => 'asd']);
         $request->setQuery($params);
-        $baseurl = "";
-        $locale = $this->strategy->extractLocale($request, $baseurl);
+        $baseurl = '';
+        $locale  = $this->strategy->extractLocale($request, $baseurl);
 
         $this->assertInstanceOf(StrategyResultModel::class, $locale);
         $this->assertNull($locale->getLocale());
@@ -68,15 +66,16 @@ class QueryStrategyTest extends TestCase
         $this->assertEquals('testParam', $prop->getValue($this->strategy));
     }
 
-    public function testLocaleDetectionWithCustomParameter() {
+    public function testLocaleDetectionWithCustomParameter()
+    {
         $this->strategy->setStrategyOptions(['paramName' => 'testParam']);
 
         $request = new Request();
         $request->setUri('http://www.example.com/en/test/test2?testParam=de');
         $params = new Parameters(['testParam' => 'de']);
         $request->setQuery($params);
-        $baseurl = "";
-        $locale = $this->strategy->extractLocale($request, $baseurl);
+        $baseurl = '';
+        $locale  = $this->strategy->extractLocale($request, $baseurl);
 
         $this->assertInstanceOf(StrategyResultModel::class, $locale);
         $this->assertEquals($locale->getLocale(), 'de_DE');
