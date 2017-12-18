@@ -3,7 +3,7 @@
     "type": "library",
     "require": {
         "xelax90/zf2-language-route": "^1.0",
-        "php": "^7.1"
+        "php": "^7.0 || ^7.1 || ^7.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.9",
