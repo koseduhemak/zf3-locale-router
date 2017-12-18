@@ -12,8 +12,7 @@ class StrategyPluginManager extends AbstractPluginManager
     /**
      * {@inheritdoc}
      */
-    protected $aliases
-        = [
+    protected $aliases = [
             // extract strategies
             'extract-cookie'         => Extract\CookieStrategy::class,
             'extract-host'           => Extract\HostStrategy::class,
@@ -30,8 +29,7 @@ class StrategyPluginManager extends AbstractPluginManager
     /**
      * {@inheritdoc}
      */
-    protected $factories
-        = [
+    protected $factories = [
             // extract strategies
             Extract\CookieStrategy::class             => AbstractExtractStrategyFactory::class,
             Extract\HostStrategy::class               => AbstractExtractStrategyFactory::class,

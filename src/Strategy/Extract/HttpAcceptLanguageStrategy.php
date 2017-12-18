@@ -23,6 +23,10 @@ class HttpAcceptLanguageStrategy extends AbstractExtractStrategy
 
                 if (array_key_exists('language', $localeArray) && array_key_exists('region', $localeArray)) {
                     $locale = $this->getLanguage($localeArray['language'] . '_' . $localeArray['region']);
+
+                    if (!$locale) {
+                        $locale = $this->getLanguage($localeArray['language']);
+                    }
                 } else {
                     if (array_key_exists('language', $localeArray)) {
                         $locale = $this->getLanguage($localeArray['language']);

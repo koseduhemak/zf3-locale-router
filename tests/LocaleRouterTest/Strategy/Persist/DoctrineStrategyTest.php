@@ -5,16 +5,12 @@ namespace LocaleRouterTest\Strategy\Persist;
 use Doctrine\ORM\EntityManager;
 use LocaleRouter\Entity\LocaleUserInterface;
 use LocaleRouter\Options\LanguageOptions;
-use LocaleRouter\Strategy\Persist\CookieStrategy;
 use LocaleRouter\Strategy\Persist\DoctrineStrategy;
 use LocaleRouterTest\Mocks\EntityManagerMock;
 use LocaleRouterTest\Mocks\UserMock;
 use PHPUnit\Framework\TestCase;
 use Zend\Authentication\AuthenticationServiceInterface;
-use Zend\Http\Header\SetCookie;
-use Zend\Http\Request;
 use Zend\Http\Response;
-use Zend\Stdlib\ResponseInterface;
 
 class DoctrineStrategyTest extends TestCase
 {
