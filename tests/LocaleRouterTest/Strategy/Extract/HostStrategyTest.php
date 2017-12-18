@@ -5,7 +5,6 @@ namespace LocaleRouterTest\Strategy\Extract;
 
 use LocaleRouter\Model\StrategyResultModel;
 use LocaleRouter\Options\LanguageOptions;
-use LocaleRouter\Strategy\Extract\CookieStrategy;
 use LocaleRouter\Strategy\Extract\HostStrategy;
 use PHPUnit\Framework\TestCase;
 use Zend\Http\Request;
@@ -60,14 +59,5 @@ class HostStrategyTest extends TestCase
 
         $this->assertInstanceOf(StrategyResultModel::class, $locale);
         $this->assertNull($locale->getLocale());
-    }
-
-    public function testSetStrategyOptions()
-    {
-        $this->strategy->setStrategyOptions(['cookie_name' => 'cookieTestParam']);
-
-        $prop = new \ReflectionProperty(CookieStrategy::class, 'cookieName');
-        $prop->setAccessible(true);
-        $this->assertEquals('cookieTestParam', $prop->getValue($this->strategy));
     }
 }

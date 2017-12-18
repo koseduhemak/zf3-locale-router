@@ -3,6 +3,7 @@
 
 namespace LocaleRouter\Strategy\Persist;
 
+use LocaleRouter\Options\LanguageOptions;
 use Zend\Http\Header\Cookie;
 use Zend\Http\Header\SetCookie;
 use Zend\Stdlib\RequestInterface;
@@ -27,28 +28,32 @@ class CookieStrategy extends AbstractPersistStrategy
      *
      * @param RequestInterface $request
      */
-    public function __construct(RequestInterface $request)
+    public function __construct(LanguageOptions $languageOptions, RequestInterface $request)
     {
         $this->request = $request;
+
+        parent::__construct($languageOptions);
     }
 
     public function save($locale, ResponseInterface $response)
     {
-        $cookieName   = $this->getCookieName();
-        $cookieLocale = null;
+        if (($locale = $this->getLanguage($locale))) {
+            $cookieName   = $this->getCookieName();
+            $cookieLocale = null;
 
-        /** @var Cookie $cookie */
-        $cookie = $this->request->getCookie();
+            /** @var Cookie $cookie */
+            $cookie = $this->request->getCookie();
 
-        if ($cookie && $cookie->offsetExists($cookieName)) {
-            $cookieLocale = $cookie->offsetGet($cookieName);
-        }
+            if ($cookie && $cookie->offsetExists($cookieName)) {
+                $cookieLocale = $cookie->offsetGet($cookieName);
+            }
 
-        if ($cookieLocale !== $locale) {
-            $path = '/';
+            if ($cookieLocale !== $locale) {
+                $path = '/';
 
-            $setCookie = new SetCookie($cookieName, $locale, null, $path);
-            $response->getHeaders()->addHeader($setCookie);
+                $setCookie = new SetCookie($cookieName, $locale, null, $path);
+                $response->getHeaders()->addHeader($setCookie);
+            }
         }
 
         return $response;
@@ -64,5 +69,12 @@ class CookieStrategy extends AbstractPersistStrategy
         }
 
         return (string) $this->cookieName;
+    }
+
+    public function setStrategyOptions(array $options = [])
+    {
+        if (array_key_exists('cookieName', $options)) {
+            $this->cookieName = $options['cookieName'];
+        }
     }
 }

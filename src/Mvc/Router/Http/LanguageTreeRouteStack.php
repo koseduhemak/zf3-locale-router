@@ -107,7 +107,7 @@ class LanguageTreeRouteStack extends \ZF2LanguageRoute\Mvc\Router\Http\LanguageT
         $reqUri->setQuery($params);
         $newUri = $reqUri->toString();
 
-        $start = strpos($newUri, $reqUri->getHost()) + strlen($reqUri->getHost());
+        $start  = strpos($newUri, $reqUri->getHost()) + strlen($reqUri->getHost());
         $newUri = substr($newUri, $start);
         $newUri = substr($newUri, strlen($oldLanguage) + 1);
 

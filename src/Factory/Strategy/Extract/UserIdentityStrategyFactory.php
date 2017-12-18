@@ -2,7 +2,6 @@
 
 namespace LocaleRouter\Factory\Strategy\Persist;
 
-use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Extract\UserIdentityStrategy;
@@ -10,7 +9,8 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 
 class UserIdentityStrategyFactory implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null) {
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
         /** @var LanguageOptions $languageOptions */
         $languageOptions = $container->get(LanguageOptions::class);
 

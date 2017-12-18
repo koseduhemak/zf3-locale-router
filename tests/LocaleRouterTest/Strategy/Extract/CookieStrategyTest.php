@@ -57,7 +57,7 @@ class CookieStrategyTest extends TestCase
 
     public function testSetStrategyOptions()
     {
-        $this->strategy->setStrategyOptions(['cookie_name' => 'cookieTestParam']);
+        $this->strategy->setStrategyOptions(['cookieName' => 'cookieTestParam']);
 
         $prop = new \ReflectionProperty(CookieStrategy::class, 'cookieName');
         $prop->setAccessible(true);
@@ -66,7 +66,7 @@ class CookieStrategyTest extends TestCase
 
     public function testLocaleDetectionWithCustomParameter()
     {
-        $this->strategy->setStrategyOptions(['cookie_name' => 'cookieTestParam']);
+        $this->strategy->setStrategyOptions(['cookieName' => 'cookieTestParam']);
 
         $request = new Request();
         $request->setUri('http://www.example.com/en/test/test2?testParam=de');

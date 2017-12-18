@@ -3,7 +3,6 @@
 namespace LocaleRouter\Strategy\Extract;
 
 use LocaleRouter\Model\StrategyResultModel;
-use SlmLocale\Strategy\Exception\InvalidArgumentException;
 use Zend\Stdlib\RequestInterface;
 
 class HostStrategy extends AbstractExtractStrategy
