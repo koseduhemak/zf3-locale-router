@@ -27,8 +27,10 @@ class LanguageTreeRouteStackTest extends TestCase
     {
         $serviceManager = $this->getServiceLocator();
 
-        $factory = new LanguageTreeRouteStackDelegatorFactory();
-        $this->languageTreeRouteStack = $factory->__invoke($serviceManager, 'HttpRouter', function() { return LanguageTreeRouteStack::factory(); }, null);
+        $factory                      = new LanguageTreeRouteStackDelegatorFactory();
+        $this->languageTreeRouteStack = $factory->__invoke($serviceManager, 'HttpRouter', function () {
+            return LanguageTreeRouteStack::factory();
+        }, null);
     }
 
     public function testChaininOfStrategies()
@@ -36,7 +38,7 @@ class LanguageTreeRouteStackTest extends TestCase
         $request = new Request();
         $request->setUri('http://www.example.com/de/test/test2?lang=en');
         $request->setQuery(new Parameters([
-            'lang' => 'en'
+            'lang' => 'en',
         ]));
 
         $this->languageTreeRouteStack->match($request);
@@ -69,7 +71,6 @@ class LanguageTreeRouteStackTest extends TestCase
 
         // should be static::LANGUAGE_EN, because we added a cookie
         $this->assertEquals(static::LANGUAGE_EN, $this->languageTreeRouteStack->getLastMatchedLocale());
-
 
         $request = new Request();
         $request->setUri('http://www.example.com/test/test2');
@@ -124,11 +125,11 @@ class LanguageTreeRouteStackTest extends TestCase
 
         $serviceLocator->setService('Config', $moduleConfig);
 
-        #$serviceLocator->setFactory(StrategyPluginManager::class, StrategyPluginManagerFactory::class);
-        #$serviceLocator->setFactory('HttpRouter', \Zend\Router\Http\HttpRouterFactory::class);
-        #$serviceLocator->setFactory(TreeRouteStack::class, \Zend\Router\Http\HttpRouterFactory::class);
-        #$serviceLocator->setFactory('RoutePluginManager', \Zend\Router\RoutePluginManagerFactory::class);
-        #$serviceLocator->setFactory(\Zend\Router\RouteStackInterface::class, \Zend\Router\RouteStackInterface::class);
+        //$serviceLocator->setFactory(StrategyPluginManager::class, StrategyPluginManagerFactory::class);
+        //$serviceLocator->setFactory('HttpRouter', \Zend\Router\Http\HttpRouterFactory::class);
+        //$serviceLocator->setFactory(TreeRouteStack::class, \Zend\Router\Http\HttpRouterFactory::class);
+        //$serviceLocator->setFactory('RoutePluginManager', \Zend\Router\RoutePluginManagerFactory::class);
+        //$serviceLocator->setFactory(\Zend\Router\RouteStackInterface::class, \Zend\Router\RouteStackInterface::class);
 
         $serviceLocator->configure($moduleConfig['service_manager']);
 

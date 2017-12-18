@@ -3,7 +3,6 @@
 
 namespace LocaleRouterTest\Mocks;
 
-
 use LocaleRouter\Entity\LocaleUserInterface;
 
 class UserMock implements LocaleUserInterface
@@ -26,5 +25,4 @@ class UserMock implements LocaleUserInterface
     {
         $this->locale = $locale;
     }
-
 }

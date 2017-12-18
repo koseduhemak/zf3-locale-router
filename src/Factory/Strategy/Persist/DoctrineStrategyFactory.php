@@ -34,6 +34,6 @@ class DoctrineStrategyFactory implements FactoryInterface
             );
         }
 
-        return new $requestedName($entityManager, $authService);
+        return new $requestedName($languageOptions, $entityManager, $authService);
     }
 }

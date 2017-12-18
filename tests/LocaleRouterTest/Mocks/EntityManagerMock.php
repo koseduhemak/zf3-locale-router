@@ -3,10 +3,7 @@
 
 namespace LocaleRouterTest\Mocks;
 
-
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManager;
-use PHPUnit\Framework\MockObject\MockObject;
 
 class EntityManagerMock implements ObjectManager
 {

@@ -16,7 +16,8 @@ class LanguageTreeRouteStack extends \ZF2LanguageRoute\Mvc\Router\Http\LanguageT
     /** @var string */
     protected $redirect = '';
 
-    public function match(RequestInterface $request, $pathOffset = null, array $options = []) {
+    public function match(RequestInterface $request, $pathOffset = null, array $options = [])
+    {
         $locale = null;
 
         if ($this->baseUrl === null && method_exists($request, 'getBaseUrl')) {

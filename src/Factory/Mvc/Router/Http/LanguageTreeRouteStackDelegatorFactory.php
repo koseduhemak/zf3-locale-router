@@ -11,7 +11,8 @@ use Zend\ServiceManager\Factory\DelegatorFactoryInterface;
 
 class LanguageTreeRouteStackDelegatorFactory implements DelegatorFactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $name, callable $callback, array $options = null) {
+    public function __invoke(ContainerInterface $container, $name, callable $callback, array $options = null)
+    {
         $router = $callback();
 
         if (! $router instanceof LanguageTreeRouteStack) {
