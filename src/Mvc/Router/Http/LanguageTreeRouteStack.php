@@ -33,9 +33,7 @@ class LanguageTreeRouteStack extends \ZF2LanguageRoute\Mvc\Router\Http\LanguageT
             $locale = $result->getLocale();
 
             if ($result->isProcessingStopped()) {
-                return TranslatorAwareTreeRouteStack::match(
-                    $request, $pathOffset, $options
-                );
+                return TranslatorAwareTreeRouteStack::match($request, $pathOffset, $options);
             }
 
             // stop processing if a strategy found a locale
