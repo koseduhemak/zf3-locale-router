@@ -3,12 +3,12 @@
 
 namespace LocaleRouterTest\Strategy\Extract;
 
+use LocaleRouter\Entity\LocaleUserInterface;
 use LocaleRouter\Model\StrategyResultModel;
 use LocaleRouter\Options\LanguageOptions;
-use LocaleRouter\Strategy\Extract\CookieStrategy;
 use LocaleRouter\Strategy\Extract\UserIdentityStrategy;
 use PHPUnit\Framework\TestCase;
-use Zend\Http\Header\Cookie;
+use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Http\Request;
 
 class UserIdentityStrategyTest extends TestCase
@@ -24,63 +24,53 @@ class UserIdentityStrategyTest extends TestCase
 
     public function testLocaleDetection()
     {
+        // setup mock objects
+        $userMockValidLocale = $this->createMock(LocaleUserInterface::class);
+        $userMockValidLocale->expects($this->any())->method('getLocale')->will($this->returnValue('de_DE'));
+
+        $authServiceMock = $this->createMock(AuthenticationServiceInterface::class);
+        $authServiceMock->expects($this->any())
+            ->method('hasIdentity')
+            ->will($this->returnValue(true));
+
+        $authServiceMock->expects($this->any())
+            ->method('getIdentity')
+            ->will($this->returnValue($userMockValidLocale));
+        $this->strategy->setAuthService($authServiceMock);
+
         $request = new Request();
         $request->setUri('http://www.example.com/de/test/test2?lang=en');
-
-        $cookie = new Cookie();
-        $cookie->offsetSet(CookieStrategy::COOKIE_NAME, 'en_US');
-
-        $request->getHeaders()->addHeader($cookie);
-
-        $baseurl = '';
-        $locale  = $this->strategy->extractLocale($request, $baseurl);
-
-        $this->assertInstanceOf(StrategyResultModel::class, $locale);
-        $this->assertEquals($locale->getLocale(), 'en_US');
-    }
-
-    public function testCannotDetectLocale()
-    {
-        $request = new Request();
-        $request->setUri('http://www.example.com/de/test/test2?lang=en');
-
-        $cookie = new Cookie();
-        $cookie->offsetSet(CookieStrategy::COOKIE_NAME, 'foo');
-
-        $request->getHeaders()->addHeader($cookie);
-
-        $baseurl = '';
-        $locale  = $this->strategy->extractLocale($request, $baseurl);
-
-        $this->assertInstanceOf(StrategyResultModel::class, $locale);
-        $this->assertNull($locale->getLocale());
-    }
-
-    public function testSetStrategyOptions()
-    {
-        $this->strategy->setStrategyOptions(['cookie_name' => 'cookieTestParam']);
-
-        $prop = new \ReflectionProperty(CookieStrategy::class, 'cookieName');
-        $prop->setAccessible(true);
-        $this->assertEquals('cookieTestParam', $prop->getValue($this->strategy));
-    }
-
-    public function testLocaleDetectionWithCustomParameter()
-    {
-        $this->strategy->setStrategyOptions(['cookie_name' => 'cookieTestParam']);
-
-        $request = new Request();
-        $request->setUri('http://www.example.com/en/test/test2?testParam=de');
-
-        $cookie = new Cookie();
-        $cookie->offsetSet('cookieTestParam', 'de');
-
-        $request->getHeaders()->addHeader($cookie);
 
         $baseurl = '';
         $locale  = $this->strategy->extractLocale($request, $baseurl);
 
         $this->assertInstanceOf(StrategyResultModel::class, $locale);
         $this->assertEquals($locale->getLocale(), 'de_DE');
+    }
+
+    public function testCannotDetectLocale()
+    {
+        // setup mock objects
+        $userMockValidLocale = $this->createMock(LocaleUserInterface::class);
+        $userMockValidLocale->expects($this->any())->method('getLocale')->will($this->returnValue(null));
+
+        $authServiceMock = $this->createMock(AuthenticationServiceInterface::class);
+        $authServiceMock->expects($this->any())
+            ->method('hasIdentity')
+            ->will($this->returnValue(true));
+
+        $authServiceMock->expects($this->any())
+            ->method('getIdentity')
+            ->will($this->returnValue($userMockValidLocale));
+        $this->strategy->setAuthService($authServiceMock);
+
+        $request = new Request();
+        $request->setUri('http://www.example.com/de/test/test2?lang=en');
+
+        $baseurl = '';
+        $locale  = $this->strategy->extractLocale($request, $baseurl);
+
+        $this->assertInstanceOf(StrategyResultModel::class, $locale);
+        $this->assertNull($locale->getLocale());
     }
 }
