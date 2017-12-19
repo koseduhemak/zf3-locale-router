@@ -3,8 +3,16 @@
     "description": "Setup language-aware routes in Zend Framework 3 applications like f.e. www.example.com/de/my/uri for German or www.example.com/en/my/uri for English.",
     "type": "library",
     "require": {
+        "php": "^7.0 || ^7.1 || ^7.2",
+        "ext-intl": "*",
         "xelax90/zf2-language-route": "^1.0",
-        "php": "^7.0 || ^7.1 || ^7.2"
+        "zendframework/zend-mvc" :           "^2.7.10 || ^3.0",
+        "zendframework/zend-servicemanager": "^3.1",
+        "zendframework/zend-eventmanager":   "^3.0",
+        "zendframework/zend-mvc-i18n":       "^1.0",
+        "zendframework/zend-http": "^2.7",
+        "zendframework/zend-modulemanager": "^2.8",
+        "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.9",
