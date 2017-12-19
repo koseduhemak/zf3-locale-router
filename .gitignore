@@ -2,3 +2,4 @@
 *.lock
 .idea
 .php_cs.cache
+tests/logs

@@ -33,5 +33,15 @@
         "zf" : {
             "module" : "LocaleRouter"
         }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "vendor/bin/php-cs-fixer fix -v --diff --dry-run",
+        "test": "vendor/bin/phpunit --colors",
+        "test-coverage": "vendor/bin/phpunit --colors=always --coverage-clover tests/logs/clover.xml",
+        "upload-coverage": "vendor/bin/php-coveralls -v"
     }
 }
