@@ -1,5 +1,6 @@
 {
     "name": "koseduhemak/zf3-locale-router",
+    "description": "Setup language-aware routes in Zend Framework 3 applications like f.e. www.example.com/de/my/uri for German or www.example.com/en/my/uri for English.",
     "type": "library",
     "require": {
         "xelax90/zf2-language-route": "^1.0",

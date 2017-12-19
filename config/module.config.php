@@ -21,29 +21,4 @@ return [
             Service\PersistStrategyService::class => Factory\Service\PersistStrategyServiceFactory::class,
         ],
     ],
-    'localeRouter' => [
-        'defaultLocale' => 'de_DE',
-
-        'languages' => ['de' => 'de_DE', 'en' => 'en_GB'],
-
-        'extractStrategies' => [
-            'extract-asset',
-            'extract-query',
-            [
-                'name'    => Strategy\Extract\UriPathStrategy::class,
-                'options' => [
-                    'redirect_when_found' => true,
-                ],
-            ],
-            'extract-cookie',
-            'extract-acceptlanguage',
-        ],
-
-        'persistStrategies' => [
-            Strategy\Persist\DoctrineStrategy::class,
-            Strategy\Persist\CookieStrategy::class,
-        ],
-
-        'authService' => 'zfcuser_auth_service',
-    ],
 ];

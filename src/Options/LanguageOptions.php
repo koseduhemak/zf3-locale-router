@@ -12,7 +12,7 @@ class LanguageOptions extends LanguageRouteOptions
      *
      * @var string
      */
-    protected $defaultLocale = 'de_DE';
+    protected $defaultLocale = '';
 
     /**
      * Strategies, which are used for extracting locale
