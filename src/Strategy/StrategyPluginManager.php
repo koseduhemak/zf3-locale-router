@@ -37,7 +37,7 @@ class StrategyPluginManager extends AbstractPluginManager
             Extract\QueryStrategy::class              => AbstractExtractStrategyFactory::class,
             Extract\UriPathStrategy::class            => AbstractExtractStrategyFactory::class,
             Extract\AssetStrategy::class              => AbstractExtractStrategyFactory::class,
-            Extract\UserIdentityStrategy::class       => AbstractExtractStrategyFactory::class,
+            Extract\UserIdentityStrategy::class       => \LocaleRouter\Factory\Strategy\Extract\UserIdentityStrategyFactory::class,
 
             // persist strategies
             Persist\DoctrineStrategy::class           => \LocaleRouter\Factory\Strategy\Persist\DoctrineStrategyFactory::class,
