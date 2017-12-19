@@ -16,9 +16,8 @@ class LanguageTreeRouteStack extends \ZF2LanguageRoute\Mvc\Router\Http\LanguageT
     /** @var string */
     protected $redirect = '';
 
-    public function match(RequestInterface $request, $pathOffset = null,
-        array $options = []
-    ) {
+    public function match(RequestInterface $request, $pathOffset = null, array $options = [])
+    {
         $locale = null;
 
         if ($this->baseUrl === null && method_exists($request, 'getBaseUrl')) {
@@ -34,9 +33,7 @@ class LanguageTreeRouteStack extends \ZF2LanguageRoute\Mvc\Router\Http\LanguageT
             $locale = $result->getLocale();
 
             if ($result->isProcessingStopped()) {
-                return TranslatorAwareTreeRouteStack::match(
-                    $request, $pathOffset, $options
-                );
+                return TranslatorAwareTreeRouteStack::match($request, $pathOffset, $options);
             }
 
             // stop processing if a strategy found a locale
@@ -60,26 +57,16 @@ class LanguageTreeRouteStack extends \ZF2LanguageRoute\Mvc\Router\Http\LanguageT
 
         $languages = $this->getLanguageOptions()->getLanguages();
 
-        if ((array_key_exists($pathParts[0], $languages)
-                || ($pathParts[0] = array_search(
-                    $pathParts[0],
-                    $languages
-                )))
-            && count($languages) > 1
-        ) {
+        if ((array_key_exists($pathParts[0], $languages) || ($pathParts[0] = array_search($pathParts[0], $languages))) && count($languages) > 1) {
             if ($oldLanguage === \Locale::getPrimaryLanguage($locale)) {
                 $this->setBaseUrl($oldBase . '/' . $oldLanguage);
             } else {
-                $this->setBaseUrl(
-                    $oldBase . '/' . \Locale::getPrimaryLanguage($locale)
-                );
+                $this->setBaseUrl($oldBase . '/' . \Locale::getPrimaryLanguage($locale));
 
                 // assemble redirect uri
                 $newUri = $this->getNewRequestUri($request, $oldLanguage);
 
-                $this->redirect = $this->getBaseUrl() . '/' . ltrim(
-                        $newUri, '/'
-                    );
+                $this->redirect = $this->getBaseUrl() . '/' . ltrim($newUri, '/');
             }
         } else {
             // assemble redirect uri
@@ -117,9 +104,7 @@ class LanguageTreeRouteStack extends \ZF2LanguageRoute\Mvc\Router\Http\LanguageT
         $reqUri->setQuery($params);
         $newUri = $reqUri->toString();
 
-        $start = strpos($newUri, $reqUri->getHost()) + strlen(
-                $reqUri->getHost()
-            );
+        $start  = strpos($newUri, $reqUri->getHost()) + strlen($reqUri->getHost());
         $newUri = substr($newUri, $start);
         $newUri = substr($newUri, strlen($oldLanguage) + 1);
 

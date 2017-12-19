@@ -4,12 +4,12 @@ namespace LocaleRouter\Strategy\Extract;
 
 use LocaleRouter\Entity\LocaleUserInterface;
 use LocaleRouter\Model\StrategyResultModel;
-use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Stdlib\RequestInterface;
 
 class UserIdentityStrategy extends AbstractExtractStrategy
 {
-    /** @var AuthenticationService */
+    /** @var AuthenticationServiceInterface */
     protected $authService;
 
     public function extractLocale(RequestInterface $request, $baseUrl)
@@ -28,5 +28,21 @@ class UserIdentityStrategy extends AbstractExtractStrategy
         $result->setLocale($locale);
 
         return $result;
+    }
+
+    /**
+     * @return AuthenticationServiceInterface
+     */
+    public function getAuthService()
+    {
+        return $this->authService;
+    }
+
+    /**
+     * @param AuthenticationServiceInterface $authService
+     */
+    public function setAuthService(AuthenticationServiceInterface $authService)
+    {
+        $this->authService = $authService;
     }
 }

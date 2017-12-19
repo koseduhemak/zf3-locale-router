@@ -3,7 +3,6 @@
 namespace LocaleRouter\Strategy\Extract;
 
 use LocaleRouter\Model\StrategyResultModel;
-use SlmLocale\Strategy\Exception\InvalidArgumentException;
 use Zend\Stdlib\RequestInterface;
 
 class HostStrategy extends AbstractExtractStrategy
@@ -13,7 +12,7 @@ class HostStrategy extends AbstractExtractStrategy
     private $domain;
     private $aliases;
 
-    public function setStrategyOptions($options = [])
+    public function setStrategyOptions(array $options = [])
     {
         if (array_key_exists('domain', $options)) {
             $this->domain = (string) $options['domain'];
@@ -30,12 +29,12 @@ class HostStrategy extends AbstractExtractStrategy
 
         $domain = $this->getDomain();
         if (! null === $domain) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'The strategy must be configured with a domain option'
             );
         }
         if (strpos($domain, self::LOCALE_KEY) === false) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 sprintf(
                     'The domain %s must contain a locale key part "%s"',
                     $domain, self::LOCALE_KEY

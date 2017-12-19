@@ -2,17 +2,8 @@
 
 namespace LocaleRouter\Strategy\Persist;
 
-use Zend\Stdlib\ResponseInterface;
+use LocaleRouter\Strategy\AbstractStrategy;
 
-abstract class AbstractPersistStrategy implements PersistStrategyInterface
+abstract class AbstractPersistStrategy extends AbstractStrategy implements PersistStrategyInterface
 {
-    public function save($locale, ResponseInterface $response)
-    {
-        // TODO: Implement save() method.
-    }
-
-    public function setStrategyOptions(array $options = [])
-    {
-        // TODO: Implement setStrategyOptions() method.
-    }
 }

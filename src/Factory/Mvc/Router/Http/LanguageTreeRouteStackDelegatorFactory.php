@@ -1,4 +1,5 @@
 <?php
+
 namespace LocaleRouter\Factory\Mvc\Router\Http;
 
 use Interop\Container\ContainerInterface;
@@ -10,9 +11,8 @@ use Zend\ServiceManager\Factory\DelegatorFactoryInterface;
 
 class LanguageTreeRouteStackDelegatorFactory implements DelegatorFactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $name,
-        callable $callback, array $options = null
-    ) {
+    public function __invoke(ContainerInterface $container, $name, callable $callback, array $options = null)
+    {
         $router = $callback();
 
         if (! $router instanceof LanguageTreeRouteStack) {
@@ -22,37 +22,25 @@ class LanguageTreeRouteStackDelegatorFactory implements DelegatorFactoryInterfac
         $languageOptions = $container->get(LanguageOptions::class);
         $router->setLanguageOptions($languageOptions);
 
-        if ($container->has('zfcuser_auth_service')) {
+        /*if ($container->has('zfcuser_auth_service')) {
             $router->setAuthenticationService(
                 $container->get('zfcuser_auth_service')
             );
-        }
+        }*/
 
         $strategyPluginManager = $container->get(StrategyPluginManager::class);
 
         $strategyClasses = [];
         foreach ($languageOptions->getExtractStrategies() as $strategy) {
-            if (is_string($strategy)
-                || (is_array($strategy)
-                    && array_key_exists('name', $strategy))
-            ) {
-                $strategyIdentifier = is_array($strategy) ? $strategy['name']
-                    : $strategy;
+            if (is_string($strategy) || (is_array($strategy) && array_key_exists('name', $strategy))) {
+                $strategyIdentifier = is_array($strategy) ? $strategy['name'] : $strategy;
 
                 if ($strategyPluginManager->has($strategyIdentifier)) {
                     /** @var ExtractStrategyInterface $strategyClass */
-                    $strategyClass = $strategyPluginManager->get(
-                        $strategyIdentifier
-                    );
+                    $strategyClass = $strategyPluginManager->get($strategyIdentifier);
 
-                    if (is_array($strategy)
-                        && array_key_exists(
-                            'options', $strategy
-                        )
-                    ) {
-                        $strategyClass->setStrategyOptions(
-                            $strategy['options']
-                        );
+                    if (is_array($strategy) && array_key_exists('options', $strategy)) {
+                        $strategyClass->setStrategyOptions($strategy['options']);
                     }
 
                     $strategyClasses[] = $strategyClass;
