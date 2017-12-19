@@ -1,6 +1,6 @@
 <?php
 
-namespace LocaleRouter\Factory\Strategy\Persist;
+namespace LocaleRouter\Factory\Strategy\Extract;
 
 use Interop\Container\ContainerInterface;
 use LocaleRouter\Options\LanguageOptions;
