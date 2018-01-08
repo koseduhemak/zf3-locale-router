@@ -28,7 +28,7 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface
         // execute here so \Locale::getDefault() is set with the locale... Otherwise detection is in some cases too late.
         $routeListener->onRoute($e);
 
-        #$routeListener->attach($eventManager, PHP_INT_MAX);
+        //$routeListener->attach($eventManager, PHP_INT_MAX);
     }
 
     public function getConfig()

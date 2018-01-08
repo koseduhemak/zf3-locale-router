@@ -7,6 +7,10 @@ use Zend\Stdlib\RequestInterface;
 
 class HttpAcceptLanguageStrategy extends AbstractExtractStrategy
 {
+    public function setStrategyOptions(array $options = [])
+    {
+    }
+
     public function extractLocale(RequestInterface $request, $baseUrl)
     {
         $result = new StrategyResultModel();

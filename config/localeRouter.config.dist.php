@@ -18,12 +18,8 @@ $settings = [
             ]
         ],
         'extract-query',
-        [
-            'name'    => LocaleRouter\Strategy\Extract\UriPathStrategy::class,
-            'options' => [
-                'redirect_when_found' => true,
-            ],
-        ],
+        'extract-uripath',
+        'extract-useridentity',
         'extract-cookie',
         'extract-acceptlanguage',
     ],*/
