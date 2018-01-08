@@ -24,6 +24,7 @@ class StrategyPluginManager extends AbstractPluginManager
 
             // persist strategies
             'persist-doctrine'       => Persist\DoctrineStrategy::class,
+            'persist-cookie'         => Persist\CookieStrategy::class,
         ];
 
     /**

@@ -9,14 +9,17 @@ $settings = [
 
     // Adding extract strategies
     /*'extractStrategies' => [
-        'extract-asset',
-        'extract-query',
         [
-            'name'    => LocaleRouter\Strategy\Extract\UriPathStrategy::class,
+            'name' => 'extract-asset',
             'options' => [
-                'redirect_when_found' => true,
-            ],
+                'file_extensions' => [
+                    'js', 'css', 'jpg', 'jpeg', 'gif', 'png'
+                ]
+            ]
         ],
+        'extract-query',
+        'extract-uripath',
+        'extract-useridentity',
         'extract-cookie',
         'extract-acceptlanguage',
     ],*/
