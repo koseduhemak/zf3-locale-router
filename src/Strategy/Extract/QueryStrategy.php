@@ -7,8 +7,10 @@ use Zend\Stdlib\RequestInterface;
 
 final class QueryStrategy extends AbstractExtractStrategy
 {
+    const PARAM_NAME = 'locale';
+
     /** @var string */
-    protected $paramName = 'locale';
+    protected $paramName;
 
     public function setStrategyOptions(array $options = [])
     {
@@ -22,7 +24,7 @@ final class QueryStrategy extends AbstractExtractStrategy
         $result = new StrategyResultModel();
         $locale = null;
 
-        $queryParam = $request->getQuery($this->paramName, false);
+        $queryParam = $request->getQuery($this->getParamName(), false);
 
         if ($queryParam) {
             $locale = $this->getLanguage($queryParam);
@@ -31,5 +33,17 @@ final class QueryStrategy extends AbstractExtractStrategy
         $result->setLocale($locale);
 
         return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function getParamName()
+    {
+        if (null === $this->paramName) {
+            return self::PARAM_NAME;
+        }
+
+        return (string) $this->paramName;
     }
 }

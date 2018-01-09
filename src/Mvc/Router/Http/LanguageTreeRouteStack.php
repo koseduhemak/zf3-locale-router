@@ -3,6 +3,7 @@
 namespace LocaleRouter\Mvc\Router\Http;
 
 use LocaleRouter\Model\StrategyResultModel;
+use LocaleRouter\Strategy\Extract\QueryStrategy;
 use Zend\Mvc\I18n\Router\TranslatorAwareTreeRouteStack;
 use Zend\Router\RouteMatch;
 use Zend\Stdlib\RequestInterface;
@@ -81,9 +82,7 @@ class LanguageTreeRouteStack extends \ZF2LanguageRoute\Mvc\Router\Http\LanguageT
         $this->lastMatchedLocale = $locale;
 
         // match route
-        $res = TranslatorAwareTreeRouteStack::match(
-            $request, $pathOffset, $options
-        );
+        $res = TranslatorAwareTreeRouteStack::match($request, $pathOffset, $options);
 
         $this->setBaseUrl($oldBase);
 
@@ -94,13 +93,24 @@ class LanguageTreeRouteStack extends \ZF2LanguageRoute\Mvc\Router\Http\LanguageT
         return $res;
     }
 
-    public function getNewRequestUri(RequestInterface $request,
-        $oldLanguage = ''
-    ) {
+    public function getNewRequestUri(RequestInterface $request, $oldLanguage = '')
+    {
         /** @var Uri $reqUri */
         $reqUri = $request->getUri();
         $params = $reqUri->getQueryAsArray();
-        unset($params['lang']);
+
+        $queryParamName = null;
+        foreach ($this->strategies as $strategy) {
+            if ($strategy instanceof QueryStrategy) {
+                $queryParamName = $strategy->getParamName();
+                break;
+            }
+        }
+
+        if ($paramName) {
+            unset($params[$paramName]);
+        }
+
         $reqUri->setQuery($params);
         $newUri = $reqUri->toString();
 
