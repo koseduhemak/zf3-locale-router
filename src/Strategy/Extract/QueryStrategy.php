@@ -8,7 +8,7 @@ use Zend\Stdlib\RequestInterface;
 final class QueryStrategy extends AbstractExtractStrategy
 {
     /** @var string */
-    protected $paramName = 'lang';
+    protected $paramName = 'locale';
 
     public function setStrategyOptions(array $options = [])
     {
