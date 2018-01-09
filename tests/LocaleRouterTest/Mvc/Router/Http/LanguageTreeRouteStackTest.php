@@ -6,6 +6,7 @@ use LocaleRouter\Factory\Mvc\Router\Http\LanguageTreeRouteStackDelegatorFactory;
 use LocaleRouter\Factory\Strategy\StrategyPluginManagerFactory;
 use LocaleRouter\Mvc\Router\Http\LanguageTreeRouteStack;
 use LocaleRouter\Strategy\Extract\CookieStrategy;
+use LocaleRouter\Strategy\Extract\QueryStrategy;
 use LocaleRouter\Strategy\StrategyPluginManager;
 use PHPUnit\Framework\TestCase;
 use Zend\Http\Header\AcceptLanguage;
@@ -38,7 +39,7 @@ class LanguageTreeRouteStackTest extends TestCase
         $request = new Request();
         $request->setUri('http://www.example.com/de/test/test2?lang=en');
         $request->setQuery(new Parameters([
-            'lang' => 'en',
+            QueryStrategy::PARAM_NAME => 'en',
         ]));
 
         $this->languageTreeRouteStack->match($request);

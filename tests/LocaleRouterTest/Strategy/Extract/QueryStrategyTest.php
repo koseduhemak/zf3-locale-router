@@ -25,7 +25,7 @@ class QueryStrategyTest extends TestCase
     {
         $request = new Request();
         $request->setUri('http://www.example.com/de/test/test2?lang=en');
-        $params = new Parameters(['lang' => 'en']);
+        $params = new Parameters([QueryStrategy::PARAM_NAME => 'en']);
         $request->setQuery($params);
         $baseurl = '';
         $locale  = $this->strategy->extractLocale($request, $baseurl);
@@ -35,7 +35,7 @@ class QueryStrategyTest extends TestCase
 
         $request = new Request();
         $request->setUri('http://www.example.com/en/test/test2?lang=de');
-        $params = new Parameters(['lang' => 'de']);
+        $params = new Parameters([QueryStrategy::PARAM_NAME => 'de']);
         $request->setQuery($params);
         $baseurl = '';
         $locale  = $this->strategy->extractLocale($request, $baseurl);
@@ -48,7 +48,7 @@ class QueryStrategyTest extends TestCase
     {
         $request = new Request();
         $request->setUri('http://www.example.com/detest/test2?lang=asd');
-        $params = new Parameters(['lang' => 'asd']);
+        $params = new Parameters([QueryStrategy::PARAM_NAME => 'asd']);
         $request->setQuery($params);
         $baseurl = '';
         $locale  = $this->strategy->extractLocale($request, $baseurl);
