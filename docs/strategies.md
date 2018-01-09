@@ -75,7 +75,7 @@ Request URI: http://www.example.com/nl/my/uri
 ## Query strategy
 - config key: `extract-query`
 - options
-  - paramName (string): name of the parameter used for the detection. Default value: `lang`.
+  - paramName (string): name of the parameter used for the detection. Default value: `locale`.
 
 Similar to [Uripath strategy](#uripath-strategy), but tries to extract the locale from a query string:
 ```php
