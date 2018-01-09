@@ -107,8 +107,8 @@ class LanguageTreeRouteStack extends \ZF2LanguageRoute\Mvc\Router\Http\LanguageT
             }
         }
 
-        if ($paramName) {
-            unset($params[$paramName]);
+        if ($queryParamName) {
+            unset($params[$queryParamName]);
         }
 
         $reqUri->setQuery($params);
