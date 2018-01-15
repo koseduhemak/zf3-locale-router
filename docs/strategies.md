@@ -365,3 +365,87 @@ class Module
 }
 
 ``` 
+
+# PHPUnit tests
+This module is disabled for `phpunit` tests by default, because `\Zend\Test\PHPUnit\Controller\AbstractControllerTestCase` does not work well with this module:
+The `LanguageTreeRouteStack` cannot extract locale in the following scenario and will therefore issue a redirect response (which would break your tests).
+
+Therefore the locale detection is disabled by default when executed in a `phpunit` environment.
+
+```php
+...
+use PHPUnit\Framework\TestCase;
+use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
+
+class Search extends AbstractControllerTestCase
+{
+    public function setUp()
+    {
+        $this->setApplicationConfig(include 'config/application.config.php');
+    }
+
+    public function testAction()
+    {
+        $this->dispatch('/');
+        $this->assertResponseStatusCode(200); # this will be always 302 if you use the dispatch method to issue a "faked" request to your controllers.
+        $this->assertModuleName('MyModule');
+        $this->assertMatchedRouteName('my/route');
+    }
+}
+``` 
+
+If you want to explicitly test the processing of locale / need a properly set locale for your test case, you have two options:
+
+* Enable it per default for `phpunit` tests via `phpunit` configured server variable.
+* Enable it intentionally on a portion of your tests / one specific test.
+
+## Activate for all PHPUnit tests
+```xml
+<phpunit>
+    ...
+    <php>
+        <server name="LOCALEROUTER_PHPUNIT" value="true"/>
+    </php>
+    ...
+</phpunit>
+```
+
+## Activate for a portion of tests / when you need it
+```php
+use PHPUnit\Framework\TestCase;
+use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
+
+class Search extends AbstractControllerTestCase
+{
+    public function setUp()
+    {
+        $this->setApplicationConfig(include 'config/application.config.php');
+        $bootstrap      = \Zend\Mvc\Application::init(include 'config/application.config.php');
+        $serviceManager = $bootstrap->getServiceManager();
+    }
+
+    public function testAction()
+    {
+        $_SERVER['LOCALEROUTER_PHPUNIT'] = true;
+        
+        // between this two lines you can do your locale aware tests. Keep in mind, that the $this->dispatch method does not work perfectly.
+        // you can dispatch a controller manually though
+        $myController = $this->serviceManager->get('ControllerManager')->get(MyController::class);
+        
+        // setup post parameters
+        $params = new Parameters();
+        $params->set('product', $productId);
+        
+        // setup post request
+        $request = new Request();
+        
+        // you can - of course - also use a GET request or other request methods 
+        $request->setMethod('POST');
+        $request->setPost($params);
+        
+        $response = $myController->dispatch($request);
+        
+        $_SERVER['LOCALEROUTER_PHPUNIT'] = false;
+    }
+}
+```
