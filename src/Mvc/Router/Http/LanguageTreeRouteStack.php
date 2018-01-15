@@ -25,6 +25,11 @@ class LanguageTreeRouteStack extends \ZF2LanguageRoute\Mvc\Router\Http\LanguageT
             $this->setBaseUrl($request->getBaseUrl());
         }
 
+        // disable on phpunit (you can force processing by setting $_SERVER['LOCALEROUTER_PHPUNIT'] = true
+        if (preg_match('/.*\/phpunit$/i', $_SERVER['SCRIPT_NAME']) && (!array_key_exists('LOCALEROUTER_PHPUNIT', $_SERVER) || (array_key_exists('LOCALEROUTER_PHPUNIT', $_SERVER) && FALSE === $_SERVER['LOCALEROUTER_PHPUNIT']))) {
+            return parent::match($request, $pathOffset, $options);
+        }
+
         $oldBase = $this->baseUrl;
 
         // process strategies here

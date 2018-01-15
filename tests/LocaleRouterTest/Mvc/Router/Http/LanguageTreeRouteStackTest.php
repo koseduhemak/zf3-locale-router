@@ -90,7 +90,38 @@ class LanguageTreeRouteStackTest extends TestCase
         $this->assertEquals(static::LANGUAGE_EN, $this->languageTreeRouteStack->getLastMatchedLocale());
     }
 
-    public function getServiceLocator(array $config = [])
+    public function testPhpunitDisableEnable()
+    {
+        // to test this module we set LOCALEROUTER_PHPUNIT server-constant to true (otherwise we cannot execute test cases for localeRouter). Therefore we test here what happens if we disable processing for phpunit tests (which is the default)
+        $_SERVER['LOCALEROUTER_PHPUNIT'] = false;
+
+        $request = new Request();
+        $request->setUri('http://www.example.com/de/test/test2?lang=en');
+        $request->setQuery(new Parameters([
+            QueryStrategy::PARAM_NAME => 'en',
+        ]));
+
+        $this->languageTreeRouteStack->match($request);
+
+        // should return default lang => static::LANGUAGE_DE, because we disabled processing on phpunit
+        $this->assertEquals(static::LANGUAGE_DE, $this->languageTreeRouteStack->getLastMatchedLocale());
+
+        $_SERVER['LOCALEROUTER_PHPUNIT'] = true;
+
+        // now test with default behavior (should return english)
+        $request = new Request();
+        $request->setUri('http://www.example.com/de/test/test2?lang=en');
+        $request->setQuery(new Parameters([
+            QueryStrategy::PARAM_NAME => 'en',
+        ]));
+
+        $this->languageTreeRouteStack->match($request);
+
+        // should return default lang => static::LANGUAGE_DE, because we disabled processing on phpunit
+        $this->assertEquals(static::LANGUAGE_EN, $this->languageTreeRouteStack->getLastMatchedLocale());
+    }
+
+    protected function getServiceLocator(array $config = [])
     {
         $testCaseConfig = [
             'localeRouter' => [
