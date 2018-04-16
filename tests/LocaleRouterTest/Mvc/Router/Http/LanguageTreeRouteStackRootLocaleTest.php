@@ -43,9 +43,13 @@ class LanguageTreeRouteStackRootLocaleTest extends TestCase
         ]));
 
         $this->languageTreeRouteStack->match($request);
+        $redirect   = $this->languageTreeRouteStack->getRedirect();
 
         // should be static::LANGUAGE_EN, because we added query-strategy before uripathstrategy
         $this->assertEquals(static::LANGUAGE_EN, $this->languageTreeRouteStack->getLastMatchedLocale());
+
+        // redirect should contain "/en/"
+        $this->assertEquals('/en/test/test2?lang=en', $redirect);
 
         $request = new Request();
         $request->setUri('http://www.example.com/test/test2');
@@ -56,9 +60,13 @@ class LanguageTreeRouteStackRootLocaleTest extends TestCase
         $request->getHeaders()->addHeader($cookie);
 
         $this->languageTreeRouteStack->match($request);
+        $redirect   = $this->languageTreeRouteStack->getRedirect();
 
         // should be static::LANGUAGE_DE, because we added uripath-strategy after query-strategy and before other strategies
         $this->assertEquals(static::LANGUAGE_DE, $this->languageTreeRouteStack->getLastMatchedLocale());
+
+        // redirect should be empty, because de is root locale
+        $this->assertEmpty($redirect);
 
         $request = new Request();
         $request->setUri('http://www.example.com/test/test2');

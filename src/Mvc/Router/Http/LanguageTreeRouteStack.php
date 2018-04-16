@@ -89,6 +89,7 @@ class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
     public function match(RequestInterface $request, $pathOffset = null, array $options = [])
     {
         $locale = null;
+        $this->redirect = null;
 
         if ($this->baseUrl === null && method_exists($request, 'getBaseUrl')) {
             $this->setBaseUrl($request->getBaseUrl());
@@ -145,15 +146,19 @@ class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
 
                 $this->redirect = $this->getBaseUrl() . '/' . ltrim($newUri, '/');
             }
-        } elseif (array_key_exists('root', $languages)) {
-            $this->setBaseUrl($oldBase . '/');
         } else {
-            // assemble redirect uri
-            $newUri = $this->getNewRequestUri($request);
+            // if root locale is configured && extracted locale matches root locale
+            if (array_key_exists('root', $languages) && $locale === $languages['root']) {
+                $this->setBaseUrl($oldBase . '/');
+            } else {
+                // if no root locale is configured or if root locale is configured but current locale is not root locale
+                // redirect to correct uri
+                // assemble redirect uri
+                $newUri = $this->getNewRequestUri($request);
 
-            // need to redirect
-            $this->redirect = '/' . \Locale::getPrimaryLanguage($locale) . '/'
-                . $newUri;
+                // need to redirect
+                $this->redirect = '/' . \Locale::getPrimaryLanguage($locale) . '/' . $newUri;
+            }
         }
 
         // set the last matched locale
