@@ -96,7 +96,8 @@ class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
 
         // disable on phpunit (you can force processing by setting $_SERVER['LOCALEROUTER_PHPUNIT'] = true
         if (preg_match('/.*\/phpunit$/i', $_SERVER['SCRIPT_NAME']) && (! array_key_exists('LOCALEROUTER_PHPUNIT', $_SERVER) || (array_key_exists('LOCALEROUTER_PHPUNIT', $_SERVER) && false === $_SERVER['LOCALEROUTER_PHPUNIT']))) {
-            return parent::match($request, $pathOffset, $options);
+            $this->lastMatchedLocale = $this->getLanguageOptions()->getDefaultLocale();
+            return null;
         }
 
         $oldBase = $this->baseUrl;
