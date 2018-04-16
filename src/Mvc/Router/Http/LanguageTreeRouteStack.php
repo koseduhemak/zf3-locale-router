@@ -135,10 +135,21 @@ class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
 
         $languages = $this->getLanguageOptions()->getLanguages();
 
+        // if locale was found in uri path
         if ((array_key_exists($pathParts[0], $languages) || ($pathParts[0] = array_search($pathParts[0], $languages))) && count($languages) > 1) {
             // if locale was found in configured languages and previous locale is current locale
             if ($oldLanguage === \Locale::getPrimaryLanguage($locale)) {
                 $this->setBaseUrl($oldBase . '/' . $oldLanguage);
+
+                $newUri = $this->getNewRequestUri($request);
+
+                if (is_callable([$request, 'getRequestUri'])) {
+                    $requestedUri = $request->getRequestUri();
+
+                    if ($requestedUri !== '/' . $newUri) {
+                        $this->redirect = '/' . $newUri;
+                    }
+                }
             } else {
                 // if locale has changed after last request
                 // if root locale is configured && extracted locale matches root locale
@@ -154,14 +165,23 @@ class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
                 $this->redirect = $this->getBaseUrl() . '/' . ltrim($newUri, '/');
             }
         } else {
+            // redirect to correct uri
+            // assemble redirect uri
+            $newUri = $this->getNewRequestUri($request);
+
             // if root locale is configured && extracted locale matches root locale
             if (array_key_exists('root', $languages) && $locale === $languages['root']) {
                 $this->setBaseUrl($oldBase . '/');
+
+                if (is_callable([$request, 'getRequestUri'])) {
+                    $requestedUri = $request->getRequestUri();
+
+                    if ($requestedUri !== '/' . $newUri) {
+                        $this->redirect = '/' . $newUri;
+                    }
+                }
             } else {
                 // if no root locale is configured or if root locale is configured but current locale is not root locale
-                // redirect to correct uri
-                // assemble redirect uri
-                $newUri = $this->getNewRequestUri($request);
 
                 // need to redirect
                 $this->redirect = '/' . \Locale::getPrimaryLanguage($locale) . '/' . $newUri;
