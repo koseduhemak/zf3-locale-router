@@ -33,10 +33,6 @@ class LanguageTreeRouteStackTest extends TestCase
         $this->languageTreeRouteStack = $factory->__invoke($serviceManager, 'HttpRouter', function () {
             return LanguageTreeRouteStack::factory();
         }, null);
-
-        $languageOptions = new LanguageOptions();
-        $languageOptions->setExtractStrategies($extractStrategies);
-        $this->languageTreeRouteStack->setLanguageOptions($languageOptions);
     }
 
     public function testChaininOfStrategies()
