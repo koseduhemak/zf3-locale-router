@@ -37,7 +37,7 @@ class LanguageTreeRouteStackTest extends TestCase
     public function testChaininOfStrategies()
     {
         $request = new Request();
-        $request->setUri('http://www.example.com/de/test/test2?lang=en');
+        $request->setUri('http://www.example.com/de/test/test2?locale=en');
         $request->setQuery(new Parameters([
             QueryStrategy::PARAM_NAME => 'en',
         ]));
@@ -96,7 +96,7 @@ class LanguageTreeRouteStackTest extends TestCase
         $_SERVER['LOCALEROUTER_PHPUNIT'] = false;
 
         $request = new Request();
-        $request->setUri('http://www.example.com/de/test/test2?lang=en');
+        $request->setUri('http://www.example.com/de/test/test2?locale=en');
         $request->setQuery(new Parameters([
             QueryStrategy::PARAM_NAME => 'en',
         ]));
@@ -110,7 +110,7 @@ class LanguageTreeRouteStackTest extends TestCase
 
         // now test with default behavior (should return english)
         $request = new Request();
-        $request->setUri('http://www.example.com/de/test/test2?lang=en');
+        $request->setUri('http://www.example.com/de/test/test2?locale=en');
         $request->setQuery(new Parameters([
             QueryStrategy::PARAM_NAME => 'en',
         ]));

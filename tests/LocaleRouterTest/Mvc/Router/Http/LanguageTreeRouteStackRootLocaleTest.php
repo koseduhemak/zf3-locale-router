@@ -34,10 +34,28 @@ class LanguageTreeRouteStackRootLocaleTest extends TestCase
         }, null);
     }
 
+    public function testRedirectFromENToRoot()
+    {
+        $request = new Request();
+        $request->setUri('http://www.example.com/en/test/test2?locale=de_DE');
+        $request->setQuery(new Parameters([
+            QueryStrategy::PARAM_NAME => 'de_DE',
+        ]));
+
+        $this->languageTreeRouteStack->match($request);
+        $redirect   = $this->languageTreeRouteStack->getRedirect();
+
+        // should be static::LANGUAGE_EN, because we added query-strategy before uripathstrategy
+        $this->assertEquals(static::LANGUAGE_DE, $this->languageTreeRouteStack->getLastMatchedLocale());
+
+        // redirect should contain "/en/"
+        $this->assertEquals('/test/test2', $redirect);
+    }
+
     public function testChaininOfStrategies()
     {
         $request = new Request();
-        $request->setUri('http://www.example.com/test/test2?lang=en');
+        $request->setUri('http://www.example.com/test/test2?locale=en');
         $request->setQuery(new Parameters([
             QueryStrategy::PARAM_NAME => 'en',
         ]));
@@ -49,7 +67,7 @@ class LanguageTreeRouteStackRootLocaleTest extends TestCase
         $this->assertEquals(static::LANGUAGE_EN, $this->languageTreeRouteStack->getLastMatchedLocale());
 
         // redirect should contain "/en/"
-        $this->assertEquals('/en/test/test2?lang=en', $redirect);
+        $this->assertEquals('/en/test/test2', $redirect);
 
         $request = new Request();
         $request->setUri('http://www.example.com/test/test2');
@@ -106,7 +124,7 @@ class LanguageTreeRouteStackRootLocaleTest extends TestCase
         $_SERVER['LOCALEROUTER_PHPUNIT'] = false;
 
         $request = new Request();
-        $request->setUri('http://www.example.com/test/test2?lang=en');
+        $request->setUri('http://www.example.com/test/test2?locale=en');
         $request->setQuery(new Parameters([
             QueryStrategy::PARAM_NAME => 'en',
         ]));
@@ -120,7 +138,7 @@ class LanguageTreeRouteStackRootLocaleTest extends TestCase
 
         // now test with default behavior (should return english)
         $request = new Request();
-        $request->setUri('http://www.example.com/test/test2?lang=en');
+        $request->setUri('http://www.example.com/test/test2?locale=en');
         $request->setQuery(new Parameters([
             QueryStrategy::PARAM_NAME => 'en',
         ]));
