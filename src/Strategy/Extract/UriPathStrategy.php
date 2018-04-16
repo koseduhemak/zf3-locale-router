@@ -27,6 +27,10 @@ final class UriPathStrategy extends AbstractExtractStrategy
             $pathParts     = explode('/', $path);
 
             $locale = $this->getLanguage($pathParts[0]);
+
+            if (is_null($locale)) {
+                $locale = $this->options->getRootLanguage();
+            }
         }
 
         $result->setLocale($locale);

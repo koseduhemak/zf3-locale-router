@@ -132,4 +132,9 @@ class LanguageOptions extends AbstractOptions
     {
         $this->languages = $languages;
     }
+
+    public function getRootLanguage()
+    {
+        return array_key_exists('root', $this->languages) ? $this->languages['root'] : null;
+    }
 }
