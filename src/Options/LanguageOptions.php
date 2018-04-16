@@ -3,10 +3,18 @@
 namespace LocaleRouter\Options;
 
 use Zend\Authentication\AuthenticationService;
-use ZF2LanguageRoute\Options\LanguageRouteOptions;
+use Zend\Stdlib\AbstractOptions;
 
-class LanguageOptions extends LanguageRouteOptions
+class LanguageOptions extends AbstractOptions
 {
+    /**
+     * Array of languages allowed for language route. The key is the prefix
+     * which is attached to the url (e.g. en), the value is the associated
+     * locale  (e.g. 'en_US')
+     * @var array
+     */
+    protected $languages = ['de' => 'de_DE', 'en' => 'en_US'];
+
     /**
      * Default locale.
      *
@@ -113,5 +121,15 @@ class LanguageOptions extends LanguageRouteOptions
     public function setAuthService($authService)
     {
         $this->authService = $authService;
+    }
+
+    public function getLanguages()
+    {
+        return $this->languages;
+    }
+
+    public function setLanguages(array $languages)
+    {
+        $this->languages = $languages;
     }
 }

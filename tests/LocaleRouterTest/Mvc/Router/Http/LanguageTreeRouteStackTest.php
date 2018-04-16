@@ -5,6 +5,7 @@ namespace LocaleRouterTest\Mvc\Router\Http;
 use LocaleRouter\Factory\Mvc\Router\Http\LanguageTreeRouteStackDelegatorFactory;
 use LocaleRouter\Factory\Strategy\StrategyPluginManagerFactory;
 use LocaleRouter\Mvc\Router\Http\LanguageTreeRouteStack;
+use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Extract\CookieStrategy;
 use LocaleRouter\Strategy\Extract\QueryStrategy;
 use LocaleRouter\Strategy\StrategyPluginManager;
@@ -32,6 +33,10 @@ class LanguageTreeRouteStackTest extends TestCase
         $this->languageTreeRouteStack = $factory->__invoke($serviceManager, 'HttpRouter', function () {
             return LanguageTreeRouteStack::factory();
         }, null);
+
+        $languageOptions = new LanguageOptions();
+        $languageOptions->setExtractStrategies($extractStrategies);
+        $this->languageTreeRouteStack->setLanguageOptions($languageOptions);
     }
 
     public function testChaininOfStrategies()
