@@ -141,15 +141,6 @@ class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
             if ($oldLanguage === \Locale::getPrimaryLanguage($locale)) {
                 $this->setBaseUrl($oldBase . '/' . $oldLanguage);
 
-                $newUri = $this->getNewRequestUri($request);
-
-                if (is_callable([$request, 'getRequestUri'])) {
-                    $requestedUri = $request->getRequestUri();
-
-                    if ($requestedUri !== '/' . $newUri) {
-                        $this->redirect = '/' . $newUri;
-                    }
-                }
             } else {
                 // if locale has changed after last request
                 // if root locale is configured && extracted locale matches root locale
@@ -173,13 +164,6 @@ class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
             if (array_key_exists('root', $languages) && $locale === $languages['root']) {
                 $this->setBaseUrl($oldBase . '/');
 
-                if (is_callable([$request, 'getRequestUri'])) {
-                    $requestedUri = $request->getRequestUri();
-
-                    if ($requestedUri !== '/' . $newUri) {
-                        $this->redirect = '/' . $newUri;
-                    }
-                }
             } else {
                 // if no root locale is configured or if root locale is configured but current locale is not root locale
 
