@@ -5,7 +5,8 @@ $settings = [
     //'defaultLocale' => 'de_DE',
 
     // configure supported languages
-    //'languages' => ['de' => 'de_DE', 'en' => 'en_GB'],
+    // root key is special key. If you want example.com/myuri to be nl_NL (without "nl" segment in uri path, then you need to set the language for the "root" key)
+    //'languages' => ['root' => 'nl_NL', 'de' => 'de_DE', 'en' => 'en_GB'],
 
     // Adding extract strategies
     /*'extractStrategies' => [

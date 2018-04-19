@@ -16,7 +16,7 @@ use Zend\Router\Http\TreeRouteStack;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\Parameters;
 
-class LanguageTreeRouteStackTest extends TestCase
+class LanguageTreeRouteStackRootLocaleTest extends TestCase
 {
     const LANGUAGE_EN = 'en_GB';
     const LANGUAGE_DE = 'de_DE';
@@ -34,21 +34,43 @@ class LanguageTreeRouteStackTest extends TestCase
         }, null);
     }
 
+    public function testRedirectFromENToRoot()
+    {
+        $request = new Request();
+        $request->setUri('http://www.example.com/en/test/test2?locale=de_DE');
+        $request->setQuery(new Parameters([
+            QueryStrategy::PARAM_NAME => 'de_DE',
+        ]));
+
+        $this->languageTreeRouteStack->match($request);
+        $redirect   = $this->languageTreeRouteStack->getRedirect();
+
+        // should be static::LANGUAGE_EN, because we added query-strategy before uripathstrategy
+        $this->assertEquals(static::LANGUAGE_DE, $this->languageTreeRouteStack->getLastMatchedLocale());
+
+        // redirect should contain "/en/"
+        $this->assertEquals('/test/test2', $redirect);
+    }
+
     public function testChaininOfStrategies()
     {
         $request = new Request();
-        $request->setUri('http://www.example.com/de/test/test2?locale=en');
+        $request->setUri('http://www.example.com/test/test2?locale=en');
         $request->setQuery(new Parameters([
             QueryStrategy::PARAM_NAME => 'en',
         ]));
 
         $this->languageTreeRouteStack->match($request);
+        $redirect   = $this->languageTreeRouteStack->getRedirect();
 
         // should be static::LANGUAGE_EN, because we added query-strategy before uripathstrategy
         $this->assertEquals(static::LANGUAGE_EN, $this->languageTreeRouteStack->getLastMatchedLocale());
 
+        // redirect should contain "/en/"
+        $this->assertEquals('/en/test/test2', $redirect);
+
         $request = new Request();
-        $request->setUri('http://www.example.com/de/test/test2');
+        $request->setUri('http://www.example.com/test/test2');
 
         $cookie = new Cookie();
         $cookie->offsetSet(CookieStrategy::COOKIE_NAME, 'en_GB');
@@ -56,9 +78,13 @@ class LanguageTreeRouteStackTest extends TestCase
         $request->getHeaders()->addHeader($cookie);
 
         $this->languageTreeRouteStack->match($request);
+        $redirect   = $this->languageTreeRouteStack->getRedirect();
 
         // should be static::LANGUAGE_DE, because we added uripath-strategy after query-strategy and before other strategies
         $this->assertEquals(static::LANGUAGE_DE, $this->languageTreeRouteStack->getLastMatchedLocale());
+
+        // redirect should be empty, because de is root locale
+        $this->assertEmpty($redirect);
 
         $request = new Request();
         $request->setUri('http://www.example.com/test/test2');
@@ -70,8 +96,9 @@ class LanguageTreeRouteStackTest extends TestCase
 
         $this->languageTreeRouteStack->match($request);
 
-        // should be static::LANGUAGE_EN, because we added a cookie
-        $this->assertEquals(static::LANGUAGE_EN, $this->languageTreeRouteStack->getLastMatchedLocale());
+        // should be static::LANGUAGE_DE, because if UriPathStrategy is used in combination with "root" language, it will match even if there is no locale in uri
+        // => ['root' => 'de_DE', 'en' => 'en_GB'] => http://example.com/test would match to de_DE!
+        $this->assertEquals(static::LANGUAGE_DE, $this->languageTreeRouteStack->getLastMatchedLocale());
 
         $request = new Request();
         $request->setUri('http://www.example.com/test/test2');
@@ -86,8 +113,9 @@ class LanguageTreeRouteStackTest extends TestCase
 
         $this->languageTreeRouteStack->match($request);
 
-        // should be static::LANGUAGE_EN, because even if we did not configure "en-US" as valid locale, "en" is the spoken language according to AcceptLanguage headers. Therefore we choose "en_GB" in favor of "de_DE"
-        $this->assertEquals(static::LANGUAGE_EN, $this->languageTreeRouteStack->getLastMatchedLocale());
+        // should be static::LANGUAGE_DE, because if UriPathStrategy is used in combination with "root" language, it will match even if there is no locale in uri
+        // => ['root' => 'de_DE', 'en' => 'en_GB'] => http://example.com/test would match to de_DE!
+        $this->assertEquals(static::LANGUAGE_DE, $this->languageTreeRouteStack->getLastMatchedLocale());
     }
 
     public function testPhpunitDisableEnable()
@@ -96,7 +124,7 @@ class LanguageTreeRouteStackTest extends TestCase
         $_SERVER['LOCALEROUTER_PHPUNIT'] = false;
 
         $request = new Request();
-        $request->setUri('http://www.example.com/de/test/test2?locale=en');
+        $request->setUri('http://www.example.com/test/test2?locale=en');
         $request->setQuery(new Parameters([
             QueryStrategy::PARAM_NAME => 'en',
         ]));
@@ -110,7 +138,7 @@ class LanguageTreeRouteStackTest extends TestCase
 
         // now test with default behavior (should return english)
         $request = new Request();
-        $request->setUri('http://www.example.com/de/test/test2?locale=en');
+        $request->setUri('http://www.example.com/test/test2?locale=en');
         $request->setQuery(new Parameters([
             QueryStrategy::PARAM_NAME => 'en',
         ]));
@@ -127,7 +155,7 @@ class LanguageTreeRouteStackTest extends TestCase
             'localeRouter' => [
                 'defaultLocale' => static::LANGUAGE_DE,
 
-                'languages' => ['de' => static::LANGUAGE_DE, 'en' => static::LANGUAGE_EN],
+                'languages' => ['root' => static::LANGUAGE_DE, 'en' => static::LANGUAGE_EN],
 
                 'extractStrategies' => [
                     'extract-asset',

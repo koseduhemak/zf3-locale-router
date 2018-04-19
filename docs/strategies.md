@@ -1,3 +1,22 @@
+# Main config
+```php
+'localeRouter' => [
+    // configure default language
+    'defaultLocale' => 'de_DE',
+
+    // configure supported languages
+    // root key is special key. If you want example.com/myuri to be nl_NL (without "nl" segment in uri path, then you need to set the language for the "root" key)
+    'languages' => ['root' => 'de_DE', 'en' => 'en_GB'],
+]
+```
+
+* `defaultLocale`: Specifcy fall-back locale which is used if the locale could not be extracted from strategies
+* `languages`: Array with uri-path => locale pairs.
+  * If `root` is specified as key for a locale, no path segment will be used for this locale.
+    * Example:
+    <br>www.example.com/myuri would be `de_DE` in the example above.<br>
+    www.example.com/en/myuri would be `en_GB`. 
+
 # Extract strategies
 The following strategies can be used to extract locale information.
 

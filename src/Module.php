@@ -7,6 +7,7 @@ use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\Stdlib\ResponseInterface;
 
 class Module implements ConfigProviderInterface, BootstrapListenerInterface
 {
@@ -26,9 +27,18 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface
         $routeListener = $container->get(RouteListener::class);
 
         // execute here so \Locale::getDefault() is set with the locale... Otherwise detection is in some cases too late.
-        $routeListener->onRoute($e);
+        #$routeListener->onRoute($e);
 
-        //$routeListener->attach($eventManager, PHP_INT_MAX);
+        /*$eventManager->attach(MvcEvent::EVENT_ROUTE, function ($e) use ($app, $routeListener) {
+            $result = $routeListener->onRoute($e);
+            if ($result instanceof ResponseInterface) {
+                return $result;
+            } else {
+                \Locale::setDefault($result);
+            }
+        }, PHP_INT_MAX);*/
+
+        $routeListener->attach($eventManager, PHP_INT_MAX);
     }
 
     public function getConfig()

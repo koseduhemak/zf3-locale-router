@@ -2,7 +2,7 @@
 
 namespace LocaleRouter\Entity;
 
-interface LocaleUserInterface extends \ZF2LanguageRoute\Entity\LocaleUserInterface
+interface LocaleUserInterface
 {
     /**
      * @return string|null

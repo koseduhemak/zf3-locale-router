@@ -1,13 +1,12 @@
 <?php
 
-
 namespace LocaleRouter\Strategy\Persist;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use LocaleRouter\Entity\LocaleUserInterface;
 use LocaleRouter\Options\LanguageOptions;
 use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Stdlib\ResponseInterface;
-use ZF2LanguageRoute\Entity\LocaleUserInterface;
 
 class DoctrineStrategy extends AbstractPersistStrategy
 {

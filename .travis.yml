@@ -11,23 +11,14 @@ matrix:
       env:
         - DEPENDENCIES="--prefer-stable"
         - TEST_COVERAGE=true
-    - php: 7.0
-      env:
-        - DEPENDENCIES="--prefer-lowest --prefer-stable"
     - php: 7.1
-      env:
-        - DEPENDENCIES="--prefer-stable"
-        - TEST_COVERAGE=true
-    - php: 7.1
-      env:
-        - DEPENDENCIES="--prefer-lowest --prefer-stable"
-    - php: 7.2
       env:
         - DEPENDENCIES="--prefer-stable"
         - TEST_COVERAGE=true
     - php: 7.2
       env:
-        - DEPENDENCIES="--prefer-lowest --prefer-stable"
+        - DEPENDENCIES="--prefer-stable"
+        - TEST_COVERAGE=true
 
 before_script:
   - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
