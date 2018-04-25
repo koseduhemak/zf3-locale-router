@@ -43,7 +43,7 @@ class RouteListenerTest extends TestCase
         $this->event->setApplication($this->app);
     }
 
-    /*public function testRedirection()
+    public function testRedirection()
     {
         $serviceManager = $this->getServiceLocator();
         $factory                      = new LanguageTreeRouteStackDelegatorFactory();
@@ -85,7 +85,7 @@ class RouteListenerTest extends TestCase
         $this->assertSame('test', $response->last());
 
         $this->assertEquals('de_DE', \Locale::getDefault());
-    }*/
+    }
 
     protected function getServiceLocator(array $config = [])
     {
