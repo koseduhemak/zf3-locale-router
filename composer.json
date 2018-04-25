@@ -19,7 +19,8 @@
         "phpunit/phpunit": "^6.5",
         "satooshi/php-coveralls": "^2.0",
         "zendframework/zend-authentication": "^2.5",
-        "doctrine/orm": "^2.5"
+        "doctrine/orm": "^2.6",
+        "doctrine/doctrine-orm-module": "^2.1"
     },
     "license": "MIT",
     "authors": [
@@ -51,6 +52,7 @@
         "cs-check": "vendor/bin/php-cs-fixer fix -v --diff --dry-run",
         "test": "vendor/bin/phpunit --colors",
         "test-coverage": "vendor/bin/phpunit --colors=always --coverage-clover tests/logs/clover.xml",
+        "html-coverage": "vendor/bin/phpunit --colors=always --coverage-html tests/coverage-html",
         "upload-coverage": "vendor/bin/php-coveralls -v"
     }
 }
