@@ -1,4 +1,5 @@
 <?php
+
 $config = [
     // This should be an array of module namespaces used in the application.
     'modules' => [
@@ -7,7 +8,7 @@ $config = [
         'Zend\Router',
         'DoctrineModule',
         'DoctrineORMModule',
-        'LocaleRouter'
+        'LocaleRouter',
     ],
     // These are various options for the listeners attached to the ModuleManager
     'module_listener_options' => [

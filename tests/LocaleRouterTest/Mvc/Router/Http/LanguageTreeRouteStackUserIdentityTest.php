@@ -6,8 +6,6 @@ use LocaleRouter\Factory\Mvc\Router\Http\LanguageTreeRouteStackDelegatorFactory;
 use LocaleRouter\Factory\Strategy\StrategyPluginManagerFactory;
 use LocaleRouter\Model\StrategyResultModel;
 use LocaleRouter\Mvc\Router\Http\LanguageTreeRouteStack;
-use LocaleRouter\Strategy\Extract\CookieStrategy;
-use LocaleRouter\Strategy\Extract\QueryStrategy;
 use LocaleRouter\Strategy\Extract\UserIdentityStrategy;
 use LocaleRouter\Strategy\StrategyPluginManager;
 use PHPUnit\Framework\TestCase;
@@ -16,7 +14,6 @@ use Zend\Http\Header\Cookie;
 use Zend\Http\Request;
 use Zend\Router\Http\TreeRouteStack;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Stdlib\Parameters;
 
 class LanguageTreeRouteStackUserIdentityTest extends TestCase
 {
@@ -100,7 +97,7 @@ class LanguageTreeRouteStackUserIdentityTest extends TestCase
         $serviceLocator->configure($moduleConfig['service_manager']);
 
         // mock useridentity strategy
-        $mock = $this->getMockBuilder(UserIdentityStrategy::class)->disableOriginalConstructor()->getMock();
+        $mock   = $this->getMockBuilder(UserIdentityStrategy::class)->disableOriginalConstructor()->getMock();
         $result = new StrategyResultModel();
         $result->setLocale('de_DE');
         $mock->expects($this->any())->method('extractLocale')->willReturn($result);

@@ -2,14 +2,12 @@
 
 namespace LocaleRouterTest\Factory;
 
-use Doctrine\ORM\EntityManager;
 use LocaleRouter\Entity\LocaleUserInterface;
 use LocaleRouter\Mvc\Router\Http\LanguageTreeRouteStack;
 use LocaleRouter\Strategy\Extract\UserIdentityStrategy;
 use LocaleRouter\Strategy\Persist\DoctrineStrategy;
 use LocaleRouter\Strategy\StrategyPluginManager;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerInterface;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Router\Http\TreeRouteStack;
@@ -30,7 +28,6 @@ class FactoryTest extends TestCase
         $config['module_listener_options']['config_glob_paths'] = [
             'tests/LocaleRouterTest/Fixtures/config/{{,*.}local}.php',
         ];
-
 
         $bootstrap            = \Zend\Mvc\Application::init($config);
         $this->serviceManager = $bootstrap->getServiceManager();
@@ -57,7 +54,7 @@ class FactoryTest extends TestCase
 
     public function testUserIdentityStrategy()
     {
-        $config = $this->serviceManager->get('Config');
+        $config                                = $this->serviceManager->get('Config');
         $config['localeRouter']['authService'] = 'zfcuser_auth_service';
 
         $this->serviceManager->setAllowOverride(true);
@@ -85,7 +82,7 @@ class FactoryTest extends TestCase
 
     public function testDoctrineStrategy()
     {
-        $config = $this->serviceManager->get('Config');
+        $config                                = $this->serviceManager->get('Config');
         $config['localeRouter']['authService'] = 'zfcuser_auth_service';
 
         $this->serviceManager->setAllowOverride(true);

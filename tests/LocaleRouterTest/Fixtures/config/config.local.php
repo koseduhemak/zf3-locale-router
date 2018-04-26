@@ -1,4 +1,5 @@
 <?php
+
 return [
     'localeRouter' => [
         'defaultLocale' => 'de_DE',
