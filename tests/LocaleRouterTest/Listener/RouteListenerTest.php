@@ -3,7 +3,6 @@
 
 namespace LocaleRouterTest\Listener;
 
-
 use LocaleRouter\Factory\Mvc\Router\Http\LanguageTreeRouteStackDelegatorFactory;
 use LocaleRouter\Listener\RouteListener;
 use LocaleRouter\Model\StrategyResultModel;
@@ -19,7 +18,6 @@ use Zend\Http\Response;
 use Zend\Mvc\Application;
 use Zend\Mvc\I18n\Translator;
 use Zend\Mvc\MvcEvent;
-use Zend\Router\SimpleRouteStack;
 use Zend\ServiceManager\ServiceManager;
 
 class RouteListenerTest extends TestCase
@@ -36,28 +34,28 @@ class RouteListenerTest extends TestCase
     public function setUp()
     {
         $serviceLocator = $this->getServiceLocator();
-        $request = new Request();
-        $response = new Response();
-        $this->app = new Application($serviceLocator, new EventManager(), $request, $response);
-        $this->event = new MvcEvent();
+        $request        = new Request();
+        $response       = new Response();
+        $this->app      = new Application($serviceLocator, new EventManager(), $request, $response);
+        $this->event    = new MvcEvent();
         $this->event->setApplication($this->app);
     }
 
     public function testRedirection()
     {
-        $serviceManager = $this->getServiceLocator();
+        $serviceManager               = $this->getServiceLocator();
         $factory                      = new LanguageTreeRouteStackDelegatorFactory();
-        $router = $factory->__invoke($serviceManager, 'HttpRouter', function () {
+        $router                       = $factory->__invoke($serviceManager, 'HttpRouter', function () {
             return LanguageTreeRouteStack::factory();
         }, null);
 
         $request = new Request();
         $request->setUri('/en/test/test2');
 
-        $response = new Response();
-        $redirectResponse = new Response();
-        $translator = new Translator(new \Zend\I18n\Translator\Translator());
-        $persistStrategyService = new PersistStrategyService;
+        $response               = new Response();
+        $redirectResponse       = new Response();
+        $translator             = new Translator(new \Zend\I18n\Translator\Translator());
+        $persistStrategyService = new PersistStrategyService();
         $serviceManager->setService(RouteListener::class, new RouteListener($router, $request, $translator, $persistStrategyService));
 
         $eventManager = new EventManager();
@@ -77,9 +75,9 @@ class RouteListenerTest extends TestCase
             return 'test';
         });
 
-        $response = $eventManager->triggerEvent($event);
+        $response              = $eventManager->triggerEvent($event);
         $redirectToLanguageUri = $response->first();
-        $test2 = $response->last();
+        $test2                 = $response->last();
         $this->assertEquals($redirectToLanguageUri->getStatusCode(), 302);
         $response->next();
         $this->assertSame('test', $response->last());
@@ -133,7 +131,7 @@ class RouteListenerTest extends TestCase
         $serviceLocator->configure($moduleConfig['service_manager']);
 
         // mock useridentity strategy
-        $mock = $this->getMockBuilder(UserIdentityStrategy::class)->disableOriginalConstructor()->getMock();
+        $mock   = $this->getMockBuilder(UserIdentityStrategy::class)->disableOriginalConstructor()->getMock();
         $result = new StrategyResultModel();
         $result->setLocale('de_DE');
         $mock->expects($this->any())->method('extractLocale')->willReturn($result);
