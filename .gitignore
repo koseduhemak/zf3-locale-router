@@ -4,3 +4,4 @@
 .php_cs.cache
 tests/logs
 .DS_Store
+tests/coverage-html
