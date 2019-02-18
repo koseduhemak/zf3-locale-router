@@ -2,6 +2,7 @@
 
 namespace LocaleRouter\Options;
 
+use LocaleRouter\Mvc\Router\Http\LanguageTreeRouteStack;
 use Zend\Authentication\AuthenticationService;
 use Zend\Stdlib\AbstractOptions;
 
@@ -21,6 +22,12 @@ class LanguageOptions extends AbstractOptions
      * @var string
      */
     protected $defaultLocale = '';
+
+    /**
+     * Could be 'path' or 'domain'
+     * @var string
+     */
+    protected $urlIdentifier = LanguageTreeRouteStack::URL_IDENTIFIER_PATH;
 
     /**
      * Strategies, which are used for extracting locale
@@ -136,5 +143,21 @@ class LanguageOptions extends AbstractOptions
     public function getRootLanguage()
     {
         return array_key_exists('root', $this->languages) ? $this->languages['root'] : null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrlIdentifier()
+    {
+        return $this->urlIdentifier;
+    }
+
+    /**
+     * @param string $urlIdentifier
+     */
+    public function setUrlIdentifier($urlIdentifier)
+    {
+        $this->urlIdentifier = $urlIdentifier;
     }
 }

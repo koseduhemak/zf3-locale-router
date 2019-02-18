@@ -13,6 +13,9 @@ use Zend\Uri\Uri;
 
 class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
 {
+    const URL_IDENTIFIER_DOMAIN = 'domain';
+    const URL_IDENTIFIER_PATH = 'path';
+
     /** @var LanguageOptions */
     protected $languageOptions;
 
@@ -136,7 +139,7 @@ class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
         $languages = $this->getLanguageOptions()->getLanguages();
 
         // if locale was found in uri path
-        if ((array_key_exists($pathParts[0], $languages) || ($pathParts[0] = array_search($pathParts[0], $languages))) && count($languages) > 1) {
+        if ($this->getLanguageOptions()->getUrlIdentifier() === static::URL_IDENTIFIER_PATH && array_key_exists($pathParts[0], $languages) || ($pathParts[0] = array_search($pathParts[0], $languages) && count($languages) > 1)) {
             // if locale was found in configured languages and previous locale is current locale
             if ($oldLanguage === \Locale::getPrimaryLanguage($locale)) {
                 $this->setBaseUrl($oldBase . '/' . $oldLanguage);
@@ -155,14 +158,13 @@ class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
                 $this->redirect = $this->getBaseUrl() . '/' . ltrim($newUri, '/');
             }
         } else {
-            // redirect to correct uri
-            // assemble redirect uri
-            $newUri = $this->getNewRequestUri($request);
-
             // if root locale is configured && extracted locale matches root locale
-            if (array_key_exists('root', $languages) && $locale === $languages['root']) {
+            if (array_key_exists('root', $languages) && (is_array($languages['root']) && in_array($locale, $languages['root'])) || (is_string($languages['root']) && $locale === $languages['root'])) {
                 $this->setBaseUrl($oldBase . '/');
             } else {
+                // redirect to correct uri
+                // assemble redirect uri
+                $newUri = $this->getNewRequestUri($request);
                 // if no root locale is configured or if root locale is configured but current locale is not root locale
 
                 // need to redirect
