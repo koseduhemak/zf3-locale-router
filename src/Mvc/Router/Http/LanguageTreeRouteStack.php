@@ -159,7 +159,7 @@ class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
             }
         } else {
             // if root locale is configured && extracted locale matches root locale
-            if (array_key_exists('root', $languages) && (is_array($languages['root']) && in_array($locale, $languages['root'])) || (is_string($languages['root']) && $locale === $languages['root'])) {
+            if (array_key_exists('root', $languages) && ((is_array($languages['root']) && in_array($locale, $languages['root'])) || (is_string($languages['root']) && $locale === $languages['root']))) {
                 $this->setBaseUrl($oldBase . '/');
             } else {
                 // redirect to correct uri
