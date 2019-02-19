@@ -30,6 +30,12 @@ class LanguageOptions extends AbstractOptions
     protected $urlIdentifier = LanguageTreeRouteStack::URL_IDENTIFIER_PATH;
 
     /**
+     * Links for the link view helper
+     * @var array
+     */
+    protected $links = [];
+
+    /**
      * Strategies, which are used for extracting locale
      *
      * @var array
@@ -159,5 +165,21 @@ class LanguageOptions extends AbstractOptions
     public function setUrlIdentifier($urlIdentifier)
     {
         $this->urlIdentifier = $urlIdentifier;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLinks(): array
+    {
+        return $this->links;
+    }
+
+    /**
+     * @param array $links
+     */
+    public function setLinks(array $links)
+    {
+        $this->links = $links;
     }
 }

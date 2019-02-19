@@ -8,6 +8,17 @@ $settings = [
     // root key is special key. If you want example.com/myuri to be nl_NL (without "nl" segment in uri path, then you need to set the language for the "root" key)
     //'languages' => ['root' => 'nl_NL', 'de' => 'de_DE', 'en' => 'en_GB'],
 
+    // specify "path" if you want urls getting redirected to /en or /de scheme
+    // if anything other than path is used, f.e. domain, urls not getting any language path ("/en") added
+    // 'urlIdentifier' => 'domain',
+
+    // configure view helper
+    // specify urls linked to the configured languages
+    /*'links' => [
+        'de_DE' => 'mydomain.de',
+        'en_GB' => 'mydomain.co.uk'
+    ],*/
+
     // Adding extract strategies
     /*'extractStrategies' => [
         [
@@ -17,6 +28,13 @@ $settings = [
                     'js', 'css', 'jpg', 'jpeg', 'gif', 'png'
                 ]
             ]
+        ],
+        [
+            'name' => 'extract-host',
+            'options' => [
+                'domain' => 'mydomain.:locale',
+                'aliases' => ['co.uk' => 'en_GB', 'de' => 'de_DE'],
+            ],
         ],
         'extract-query',
         'extract-uripath',
