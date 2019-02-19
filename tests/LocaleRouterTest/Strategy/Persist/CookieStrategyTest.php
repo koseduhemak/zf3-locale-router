@@ -29,8 +29,10 @@ class CookieStrategyTest extends TestCase
         /** @var Response $resultResponse */
         $resultResponse = $this->strategy->save('de_DE', $response);
 
+        $cookieName = (new SetCookie())->getFieldName();
+
         /** @var SetCookie $setCookie */
-        $setCookie = $resultResponse->getHeaders()->get('SetCookie')->current();
+        $setCookie = $resultResponse->getHeaders()->get($cookieName)->current();
 
         $this->assertInstanceOf(ResponseInterface::class, $resultResponse);
         $this->assertEquals($setCookie->getValue(), 'de_DE');
@@ -68,8 +70,10 @@ class CookieStrategyTest extends TestCase
         /** @var Response $resultResponse */
         $resultResponse = $this->strategy->save('en_US', $response);
 
+        $cookieName = (new SetCookie())->getFieldName();
+
         /** @var SetCookie $setCookie */
-        $setCookie = $resultResponse->getHeaders()->get('SetCookie')->current();
+        $setCookie = $resultResponse->getHeaders()->get($cookieName)->current();
 
         $this->assertInstanceOf(ResponseInterface::class, $resultResponse);
         $this->assertEquals($setCookie->getValue(), 'en_US');

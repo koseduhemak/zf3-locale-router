@@ -21,4 +21,12 @@ return [
             Service\PersistStrategyService::class => Factory\Service\PersistStrategyServiceFactory::class,
         ],
     ],
+    'view_helpers' => [
+        'factories'=> [
+            View\Helper\LanguageLinkHelper::class => Factory\View\Helper\LanguageLinkHelperFactory::class
+            ],
+        'aliases' => [
+            'getLanguageLink' => View\Helper\LanguageLinkHelper::class
+        ]
+    ]
 ];
