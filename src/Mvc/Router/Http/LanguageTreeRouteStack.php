@@ -107,6 +107,9 @@ class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
 
         $oldBase = $this->baseUrl;
 
+        // set default locale
+        \Locale::setDefault($this->languageOptions->getDefaultLocale());
+
         // process strategies here
         foreach ($this->strategies as $strategy) {
             /** @var StrategyResultModel $result */
