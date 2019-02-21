@@ -14,10 +14,14 @@ $settings = [
 
     // configure view helper
     // specify urls linked to the configured languages
+    // required fields: host + scheme
     /*'links' => [
-        'de_DE' => 'mydomain.de',
-        'en_GB' => 'mydomain.co.uk'
+        'de_DE' => ['host' => 'mydomain.de', 'scheme' => 'https']
+        'en_GB' => ['host' => 'mydomain.co.uk', 'scheme' => 'https']
     ],*/
+
+    // is used for sitemap generation
+    // 'xdefault' => ['host' => 'mydomain.co.uk', 'scheme' => 'https']
 
     // Adding extract strategies
     /*'extractStrategies' => [

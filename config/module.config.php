@@ -23,10 +23,14 @@ return [
     ],
     'view_helpers' => [
         'factories'=> [
-            View\Helper\LanguageLinkHelper::class => Factory\View\Helper\LanguageLinkHelperFactory::class
+            View\Helper\LanguageLinkHelper::class => Factory\View\Helper\LanguageLinkHelperFactory::class,
+            View\Helper\ServerUrlHelper::class              => Factory\View\Helper\ServerUrlHelperFactory::class,
             ],
         'aliases' => [
-            'getLanguageLink' => View\Helper\LanguageLinkHelper::class
+            'getLanguageLink' => View\Helper\LanguageLinkHelper::class,
+            'serverUrl'           => View\Helper\ServerUrlHelper::class,
+            'serverurl'           => View\Helper\ServerUrlHelper::class,
+            'ServerUrl'           => View\Helper\ServerUrlHelper::class,
         ]
     ]
 ];
