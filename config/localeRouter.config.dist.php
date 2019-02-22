@@ -23,6 +23,9 @@ $settings = [
     // is used for sitemap generation
     // 'xdefault' => ['host' => 'mydomain.co.uk', 'scheme' => 'https']
 
+    // if set to false, only primary language will be used for hreflang generation, otherwise locale
+    // 'hreflangPrimaryLanguageOnly' => false,
+
     // Adding extract strategies
     /*'extractStrategies' => [
         [

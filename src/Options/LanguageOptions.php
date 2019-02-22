@@ -42,6 +42,12 @@ class LanguageOptions extends AbstractOptions
     protected $xdefault = [];
 
     /**
+     * Config for hreflang generation, if set to true, only language will be used as hreflang, otherwise locale
+     * @var bool
+     */
+    protected $hreflangPrimaryLanguageOnly = false;
+
+    /**
      * Strategies, which are used for extracting locale
      *
      * @var array
@@ -203,5 +209,22 @@ class LanguageOptions extends AbstractOptions
     public function setXdefault(array $xdefault)
     {
         $this->xdefault = $xdefault;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHreflangPrimaryLanguageOnly(): bool
+    {
+        return $this->hreflangPrimaryLanguageOnly;
+    }
+
+    /**
+     * @param bool $hreflangPrimaryLanguageOnly
+     */
+    public function setHreflangPrimaryLanguageOnly(
+        bool $hreflangPrimaryLanguageOnly
+    ) {
+        $this->hreflangPrimaryLanguageOnly = $hreflangPrimaryLanguageOnly;
     }
 }
