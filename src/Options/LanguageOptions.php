@@ -36,12 +36,6 @@ class LanguageOptions extends AbstractOptions
     protected $links = [];
 
     /**
-     * Config for xdefault hreflang (same structure as $links property)
-     * @var array
-     */
-    protected $xdefault = [];
-
-    /**
      * Config for hreflang generation, if set to true, only language will be used as hreflang, otherwise locale
      * @var bool
      */
@@ -193,22 +187,6 @@ class LanguageOptions extends AbstractOptions
     public function setLinks(array $links)
     {
         $this->links = $links;
-    }
-
-    /**
-     * @return array
-     */
-    public function getXdefault(): array
-    {
-        return $this->xdefault;
-    }
-
-    /**
-     * @param array $xdefault
-     */
-    public function setXdefault(array $xdefault)
-    {
-        $this->xdefault = $xdefault;
     }
 
     /**
