@@ -17,11 +17,9 @@ $settings = [
     // required fields: host + scheme
     /*'links' => [
         'de_DE' => ['host' => 'mydomain.de', 'scheme' => 'https']
-        'en_GB' => ['host' => 'mydomain.co.uk', 'scheme' => 'https']
+        'en_GB' => ['host' => 'mydomain.co.uk', 'scheme' => 'https'],
+        'xdefault' => ['host' => 'mydomain.co.uk', 'scheme' => 'https']
     ],*/
-
-    // is used for sitemap generation
-    // 'xdefault' => ['host' => 'mydomain.co.uk', 'scheme' => 'https']
 
     // if set to false, only primary language will be used for hreflang generation, otherwise locale
     // 'hreflangPrimaryLanguageOnly' => false,
