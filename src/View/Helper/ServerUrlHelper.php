@@ -2,15 +2,21 @@
 
 namespace LocaleRouter\View\Helper;
 
+use LocaleRouter\Options\LanguageOptions;
 use Zend\Console\Console;
 
 class ServerUrlHelper extends \Zend\View\Helper\ServerUrl
 {
-    protected $config;
+    /** @var LanguageOptions */
+    protected $options;
 
-    public function __construct(array $cliConfig)
+    /**
+     * ServerUrlHelper constructor.
+     * @param LanguageOptions $options
+     */
+    public function __construct(LanguageOptions $options)
     {
-        $this->config = $cliConfig;
+        $this->options = $options;
     }
 
     public function __invoke($requestUri = null)
@@ -18,11 +24,17 @@ class ServerUrlHelper extends \Zend\View\Helper\ServerUrl
         if (Console::isConsole()) {
             $locale = \Locale::getDefault();
 
-            if (array_key_exists($locale, $this->config) && array_key_exists('scheme', $this->config[$locale]) && array_key_exists('host', $this->config[$locale])) {
-                $result = $this->config[$locale]['scheme'] . '://' . $this->config[$locale]['host'] . $requestUri;
+            $linksConfig = $this->options->getLinks();
+
+            if (array_key_exists($locale, $linksConfig) && array_key_exists('scheme', $linksConfig[$locale]) && array_key_exists('host', $linksConfig[$locale])) {
+                $linksLocaleConfig = $linksConfig[$locale];
+            } elseif (!empty($locale = $this->options->getDefaultLocale()) && array_key_exists($locale, $linksConfig) && array_key_exists('scheme', $linksConfig[$locale]) && array_key_exists('host', $linksConfig[$locale])) {
+                $linksLocaleConfig = $linksConfig[$locale];
             } else {
                 throw new \Exception('No configuration for server url helper provided! Configure the "links" config key accordingly.');
             }
+
+            $result = $linksLocaleConfig['scheme'] . '://' . $linksLocaleConfig['host'] . $requestUri;
         } else {
             $result = parent::__invoke($requestUri);
         }
