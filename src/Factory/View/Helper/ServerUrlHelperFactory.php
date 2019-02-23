@@ -14,7 +14,7 @@ class ServerUrlHelperFactory implements FactoryInterface
         /** @var LanguageOptions $options */
         $options = $container->get(LanguageOptions::class);
 
-        if (is_array($options->getLinks()) && !empty($options->getLinks())) {
+        if (!is_array($options->getLinks()) || empty($options->getLinks())) {
             throw new \InvalidArgumentException('Please add a "localeRouter[links]" array configuration to your project in order for cron tasks to generate emails with absolute URIs');
         }
 
