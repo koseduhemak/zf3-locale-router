@@ -24,7 +24,7 @@ class LanguageTreeRouteStackRootLocaleTest extends TestCase
     /** @var LanguageTreeRouteStack */
     protected $languageTreeRouteStack;
 
-    public function setUp()
+    public function setUp() : void
     {
         $serviceManager = $this->getServiceLocator();
 

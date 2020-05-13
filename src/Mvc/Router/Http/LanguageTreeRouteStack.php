@@ -211,9 +211,15 @@ class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
         $reqUri->setQuery($params);
         $newUri = $reqUri->toString();
 
-        $start  = strpos($newUri, $reqUri->getHost()) + strlen($reqUri->getHost());
+        if (null !== $reqUri->getHost()) {
+            $start = strpos($newUri, $reqUri->getHost()) + strlen($reqUri->getHost());
+        } else {
+            $start = 0 + strlen($reqUri->getHost());
+        }
+
         $newUri = substr($newUri, $start);
         $newUri = substr($newUri, strlen($oldLanguage) + 1);
+
 
         return $newUri;
     }

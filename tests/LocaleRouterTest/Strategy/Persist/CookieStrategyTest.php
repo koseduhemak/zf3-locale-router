@@ -15,7 +15,7 @@ class CookieStrategyTest extends TestCase
     /** @var CookieStrategy */
     private $strategy;
 
-    public function setUp()
+    public function setUp() : void
     {
         $languageOptions = new LanguageOptions();
         $request         = new Request();

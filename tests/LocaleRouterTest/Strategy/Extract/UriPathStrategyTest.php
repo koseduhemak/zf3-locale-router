@@ -14,7 +14,7 @@ class UriPathStrategyTest extends TestCase
     /** @var UriPathStrategy */
     private $strategy;
 
-    public function setUp()
+    public function setUp() : void
     {
         $languageOptions = new LanguageOptions();
         $this->strategy  = new UriPathStrategy($languageOptions);

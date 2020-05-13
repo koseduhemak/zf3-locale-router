@@ -31,7 +31,7 @@ class RouteListenerTest extends TestCase
     /** @var Application */
     protected $app;
 
-    public function setUp()
+    public function setUp() : void
     {
         $serviceLocator = $this->getServiceLocator();
         $request        = new Request();

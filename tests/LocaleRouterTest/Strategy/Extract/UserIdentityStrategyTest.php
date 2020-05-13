@@ -16,7 +16,7 @@ class UserIdentityStrategyTest extends TestCase
     /** @var UserIdentityStrategy */
     private $strategy;
 
-    public function setUp()
+    public function setUp() : void
     {
         $languageOptions = new LanguageOptions();
         $this->strategy  = new UserIdentityStrategy($languageOptions);

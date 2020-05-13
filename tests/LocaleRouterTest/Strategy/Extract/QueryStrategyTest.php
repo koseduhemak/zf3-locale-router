@@ -15,7 +15,7 @@ class QueryStrategyTest extends TestCase
     /** @var QueryStrategy */
     private $strategy;
 
-    public function setUp()
+    public function setUp() : void
     {
         $languageOptions = new LanguageOptions();
         $this->strategy  = new QueryStrategy($languageOptions);

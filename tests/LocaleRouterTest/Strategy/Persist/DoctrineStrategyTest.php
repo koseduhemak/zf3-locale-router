@@ -17,7 +17,7 @@ class DoctrineStrategyTest extends TestCase
     /** @var DoctrineStrategy */
     private $strategy;
 
-    public function setUp()
+    public function setUp() : void
     {
         // setup mock objects
         $userMockValidLocale = new UserMock();

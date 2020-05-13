@@ -14,7 +14,7 @@ class AssetStrategyTest extends TestCase
     /** @var AssetStrategy */
     private $strategy;
 
-    public function setUp()
+    public function setUp() : void
     {
         $languageOptions = new LanguageOptions();
         $this->strategy  = new AssetStrategy($languageOptions);

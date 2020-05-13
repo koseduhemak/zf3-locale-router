@@ -21,7 +21,7 @@ class FactoryTest extends TestCase
     /** @var ServiceManager */
     protected $serviceManager;
 
-    public function setUp()
+    public function setUp() : void
     {
         $config            = include 'tests/LocaleRouterTest/Fixtures/config/application.test.config.php';
 
