@@ -12,13 +12,13 @@ use LocaleRouter\Service\PersistStrategyService;
 use LocaleRouter\Strategy\Extract\UserIdentityStrategy;
 use LocaleRouter\Strategy\StrategyPluginManager;
 use PHPUnit\Framework\TestCase;
-use Zend\EventManager\EventManager;
-use Zend\Http\Request;
-use Zend\Http\Response;
-use Zend\Mvc\Application;
-use Zend\Mvc\I18n\Translator;
-use Zend\Mvc\MvcEvent;
-use Zend\ServiceManager\ServiceManager;
+use Laminas\EventManager\EventManager;
+use Laminas\Http\Request;
+use Laminas\Http\Response;
+use Laminas\Mvc\Application;
+use Laminas\Mvc\I18n\Translator;
+use Laminas\Mvc\MvcEvent;
+use Laminas\ServiceManager\ServiceManager;
 
 class RouteListenerTest extends TestCase
 {
@@ -54,7 +54,7 @@ class RouteListenerTest extends TestCase
 
         $response               = new Response();
         $redirectResponse       = new Response();
-        $translator             = new Translator(new \Zend\I18n\Translator\Translator());
+        $translator             = new Translator(new \Laminas\I18n\Translator\Translator());
         $persistStrategyService = new PersistStrategyService();
         $serviceManager->setService(RouteListener::class, new RouteListener($router, $request, $translator, $persistStrategyService));
 
@@ -123,10 +123,10 @@ class RouteListenerTest extends TestCase
         $serviceLocator->setService('Config', $moduleConfig);
 
         //$serviceLocator->setFactory(StrategyPluginManager::class, StrategyPluginManagerFactory::class);
-        //$serviceLocator->setFactory('HttpRouter', \Zend\Router\Http\HttpRouterFactory::class);
-        //$serviceLocator->setFactory(TreeRouteStack::class, \Zend\Router\Http\HttpRouterFactory::class);
-        //$serviceLocator->setFactory('RoutePluginManager', \Zend\Router\RoutePluginManagerFactory::class);
-        //$serviceLocator->setFactory(\Zend\Router\RouteStackInterface::class, \Zend\Router\RouteStackInterface::class);
+        //$serviceLocator->setFactory('HttpRouter', \Laminas\Router\Http\HttpRouterFactory::class);
+        //$serviceLocator->setFactory(TreeRouteStack::class, \Laminas\Router\Http\HttpRouterFactory::class);
+        //$serviceLocator->setFactory('RoutePluginManager', \Laminas\Router\RoutePluginManagerFactory::class);
+        //$serviceLocator->setFactory(\Laminas\Router\RouteStackInterface::class, \Laminas\Router\RouteStackInterface::class);
 
         $serviceLocator->configure($moduleConfig['service_manager']);
 

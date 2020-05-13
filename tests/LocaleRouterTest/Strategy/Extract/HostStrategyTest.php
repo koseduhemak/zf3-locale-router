@@ -7,7 +7,7 @@ use LocaleRouter\Model\StrategyResultModel;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Extract\HostStrategy;
 use PHPUnit\Framework\TestCase;
-use Zend\Http\Request;
+use Laminas\Http\Request;
 
 class HostStrategyTest extends TestCase
 {

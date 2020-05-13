@@ -7,8 +7,8 @@ use LocaleRouter\Model\StrategyResultModel;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Extract\CookieStrategy;
 use PHPUnit\Framework\TestCase;
-use Zend\Http\Header\Cookie;
-use Zend\Http\Request;
+use Laminas\Http\Header\Cookie;
+use Laminas\Http\Request;
 
 class CookieStrategyTest extends TestCase
 {

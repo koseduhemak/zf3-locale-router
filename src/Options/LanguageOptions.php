@@ -3,8 +3,8 @@
 namespace LocaleRouter\Options;
 
 use LocaleRouter\Mvc\Router\Http\LanguageTreeRouteStack;
-use Zend\Authentication\AuthenticationService;
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Stdlib\AbstractOptions;
 
 class LanguageOptions extends AbstractOptions
 {

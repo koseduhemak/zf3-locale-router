@@ -5,11 +5,11 @@ namespace LocaleRouter\Mvc\Router\Http;
 use LocaleRouter\Model\StrategyResultModel;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Extract\QueryStrategy;
-use Zend\Authentication\AuthenticationServiceInterface;
-use Zend\Mvc\I18n\Router\TranslatorAwareTreeRouteStack;
-use Zend\Router\RouteMatch;
-use Zend\Stdlib\RequestInterface;
-use Zend\Uri\Uri;
+use Laminas\Authentication\AuthenticationServiceInterface;
+use Laminas\Mvc\I18n\Router\TranslatorAwareTreeRouteStack;
+use Laminas\Router\RouteMatch;
+use Laminas\Stdlib\RequestInterface;
+use Laminas\Uri\Uri;
 
 class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
 {

@@ -7,8 +7,8 @@ use LocaleRouter\Model\StrategyResultModel;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Extract\QueryStrategy;
 use PHPUnit\Framework\TestCase;
-use Zend\Http\Request;
-use Zend\Stdlib\Parameters;
+use Laminas\Http\Request;
+use Laminas\Stdlib\Parameters;
 
 class QueryStrategyTest extends TestCase
 {

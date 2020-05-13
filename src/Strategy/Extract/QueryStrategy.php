@@ -3,7 +3,7 @@
 namespace LocaleRouter\Strategy\Extract;
 
 use LocaleRouter\Model\StrategyResultModel;
-use Zend\Stdlib\RequestInterface;
+use Laminas\Stdlib\RequestInterface;
 
 final class QueryStrategy extends AbstractExtractStrategy
 {

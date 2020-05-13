@@ -3,7 +3,7 @@
 namespace LocaleRouter;
 
 use LocaleRouter\Options\LanguageOptions;
-use Zend\Router\Http\TreeRouteStack;
+use Laminas\Router\Http\TreeRouteStack;
 
 return [
     'router' => [

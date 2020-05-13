@@ -4,7 +4,7 @@ namespace LocaleRouter\Factory\Strategy;
 
 use Interop\Container\ContainerInterface;
 use LocaleRouter\Options\LanguageOptions;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class AbstractExtractStrategyFactory implements FactoryInterface
 {
