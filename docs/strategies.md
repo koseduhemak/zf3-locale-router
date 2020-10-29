@@ -51,7 +51,7 @@ This prevents the URI `http://www.example.com/my/asset.css` from being rewritten
 ## User identity strategy
 - config key: `extract-useridentity`
 
-This strategy tries to extract locale information from a given logged in user. You have to specify a valid `authService` (which implements `Zend\Authentication\AuthenticationServiceInterface`) in your config:
+This strategy tries to extract locale information from a given logged in user. You have to specify a valid `authService` (which implements `Laminas\Authentication\AuthenticationServiceInterface`) in your config:
 ```php
 'localeRouter' => [
     'extractStrategies' => [
@@ -227,7 +227,7 @@ The following strategies can be used to persist locale information.
 
 This strategy does persist the extracted locale to a user entity. F.e. you want to save locale information per user in your application, you can first use one of the [extract strategies](#extract-strategies) to extract the locale and then save that information to the current user entity.
 It is the counterpart of the extract [Useridentity strategy](#user-identity-strategy).
-You have to specify a valid `authService` (which implements `Zend\Authentication\AuthenticationServiceInterface`) in your config (because the strategy retrieves the user entity of the logged in user from the auth service).
+You have to specify a valid `authService` (which implements `Laminas\Authentication\AuthenticationServiceInterface`) in your config (because the strategy retrieves the user entity of the logged in user from the auth service).
 You also need to implement `LocaleRouter\Entity\LocaleUserInterface` in your user entity/model. To do so, you can just use the provided `LocaleRouter\Entity\LocaleUserTrait.php`.
 
 ```php
@@ -299,10 +299,10 @@ This example code showcases how you can set the extracted locale information to 
 namespace Application;
 
 use Gedmo\Translatable\TranslatableListener;
-use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Plugin\FlashMessenger\FlashMessenger;
-use Zend\View\Renderer\JsonRenderer;
-use Zend\View\ViewEvent;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Mvc\Plugin\FlashMessenger\FlashMessenger;
+use Laminas\View\Renderer\JsonRenderer;
+use Laminas\View\ViewEvent;
 
 class Module
 {
@@ -333,23 +333,23 @@ class Module
         $flashMessenger->setTranslatorTextDomain('Messages');
 
         // set form translator
-        \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
+        \Laminas\Validator\AbstractValidator::setDefaultTranslator($translator);
 
         $language = \Locale::getPrimaryLanguage($locale);
 
-        $translationPath = sprintf('vendor/zendframework/zend-i18n-resources/languages/%s/Zend_Captcha.php', $language);
+        $translationPath = sprintf('vendor/laminas/laminas-i18n-resources/languages/%s/Zend_Captcha.php', $language);
         if (is_readable($translationPath)) {
             $translator->addTranslationFile('phpArray', $translationPath, 'default', $locale);
         }
 
-        $translationPath = sprintf('vendor/zendframework/zend-i18n-resources/languages/%s/Zend_Validate.php', $language);
+        $translationPath = sprintf('vendor/laminas/laminas-i18n-resources/languages/%s/Zend_Validate.php', $language);
         if (is_readable($translationPath)) {
             $translator->addTranslationFile('phpArray', $translationPath, 'default', $locale);
         }
 
         // Configuring language view helper
         $sharedEvents = $eventManager->getSharedManager();
-        $sharedEvents->attach('Zend\View\View', ViewEvent::EVENT_RENDERER_POST, function ($event) use ($locale) {
+        $sharedEvents->attach('Laminas\View\View', ViewEvent::EVENT_RENDERER_POST, function ($event) use ($locale) {
             $renderer = $event->getRenderer();
             if (! $renderer instanceof JsonRenderer) {
                 $renderer->plugin('dateFormat')->setLocale($locale);
@@ -386,7 +386,7 @@ class Module
 ``` 
 
 # PHPUnit tests
-This module is disabled for `phpunit` tests by default, because `\Zend\Test\PHPUnit\Controller\AbstractControllerTestCase` does not work well with this module:
+This module is disabled for `phpunit` tests by default, because `\Laminas\Test\PHPUnit\Controller\AbstractControllerTestCase` does not work well with this module:
 The `LanguageTreeRouteStack` cannot extract locale in the following scenario and will therefore issue a redirect response (which would break your tests).
 
 Therefore the locale detection is disabled by default when executed in a `phpunit` environment.
@@ -394,7 +394,7 @@ Therefore the locale detection is disabled by default when executed in a `phpuni
 ```php
 ...
 use PHPUnit\Framework\TestCase;
-use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
+use Laminas\Test\PHPUnit\Controller\AbstractControllerTestCase;
 
 class Search extends AbstractControllerTestCase
 {
@@ -432,14 +432,14 @@ If you want to explicitly test the processing of locale / need a properly set lo
 ## Activate for a portion of tests / when you need it
 ```php
 use PHPUnit\Framework\TestCase;
-use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
+use Laminas\Test\PHPUnit\Controller\AbstractControllerTestCase;
 
 class Search extends AbstractControllerTestCase
 {
     public function setUp()
     {
         $this->setApplicationConfig(include 'config/application.config.php');
-        $bootstrap      = \Zend\Mvc\Application::init(include 'config/application.config.php');
+        $bootstrap      = \Laminas\Mvc\Application::init(include 'config/application.config.php');
         $serviceManager = $bootstrap->getServiceManager();
     }
 

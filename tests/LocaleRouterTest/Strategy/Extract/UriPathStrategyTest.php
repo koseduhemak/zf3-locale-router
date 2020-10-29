@@ -7,14 +7,14 @@ use LocaleRouter\Model\StrategyResultModel;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Extract\UriPathStrategy;
 use PHPUnit\Framework\TestCase;
-use Zend\Http\Request;
+use Laminas\Http\Request;
 
 class UriPathStrategyTest extends TestCase
 {
     /** @var UriPathStrategy */
     private $strategy;
 
-    public function setUp()
+    public function setUp() : void
     {
         $languageOptions = new LanguageOptions();
         $this->strategy  = new UriPathStrategy($languageOptions);

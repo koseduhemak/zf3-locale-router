@@ -3,7 +3,7 @@
 namespace LocaleRouter\Strategy\Extract;
 
 use LocaleRouter\Strategy\StrategyInterface;
-use Zend\Stdlib\RequestInterface;
+use Laminas\Stdlib\RequestInterface;
 
 interface ExtractStrategyInterface extends StrategyInterface
 {

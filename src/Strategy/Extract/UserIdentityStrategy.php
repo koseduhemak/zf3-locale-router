@@ -4,8 +4,8 @@ namespace LocaleRouter\Strategy\Extract;
 
 use LocaleRouter\Entity\LocaleUserInterface;
 use LocaleRouter\Model\StrategyResultModel;
-use Zend\Authentication\AuthenticationServiceInterface;
-use Zend\Stdlib\RequestInterface;
+use Laminas\Authentication\AuthenticationServiceInterface;
+use Laminas\Stdlib\RequestInterface;
 
 class UserIdentityStrategy extends AbstractExtractStrategy
 {

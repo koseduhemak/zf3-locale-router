@@ -4,10 +4,10 @@
 namespace LocaleRouter\Strategy\Persist;
 
 use LocaleRouter\Options\LanguageOptions;
-use Zend\Http\Header\Cookie;
-use Zend\Http\Header\SetCookie;
-use Zend\Stdlib\RequestInterface;
-use Zend\Stdlib\ResponseInterface;
+use Laminas\Http\Header\Cookie;
+use Laminas\Http\Header\SetCookie;
+use Laminas\Stdlib\RequestInterface;
+use Laminas\Stdlib\ResponseInterface;
 
 class CookieStrategy extends AbstractPersistStrategy
 {

@@ -9,11 +9,11 @@ use LocaleRouter\Mvc\Router\Http\LanguageTreeRouteStack;
 use LocaleRouter\Strategy\Extract\UserIdentityStrategy;
 use LocaleRouter\Strategy\StrategyPluginManager;
 use PHPUnit\Framework\TestCase;
-use Zend\Http\Header\AcceptLanguage;
-use Zend\Http\Header\Cookie;
-use Zend\Http\Request;
-use Zend\Router\Http\TreeRouteStack;
-use Zend\ServiceManager\ServiceManager;
+use Laminas\Http\Header\AcceptLanguage;
+use Laminas\Http\Header\Cookie;
+use Laminas\Http\Request;
+use Laminas\Router\Http\TreeRouteStack;
+use Laminas\ServiceManager\ServiceManager;
 
 class LanguageTreeRouteStackUserIdentityTest extends TestCase
 {
@@ -23,7 +23,7 @@ class LanguageTreeRouteStackUserIdentityTest extends TestCase
     /** @var LanguageTreeRouteStack */
     protected $languageTreeRouteStack;
 
-    public function setUp()
+    public function setUp() : void
     {
         $serviceManager = $this->getServiceLocator();
 
@@ -89,10 +89,10 @@ class LanguageTreeRouteStackUserIdentityTest extends TestCase
         $serviceLocator->setService('Config', $moduleConfig);
 
         //$serviceLocator->setFactory(StrategyPluginManager::class, StrategyPluginManagerFactory::class);
-        //$serviceLocator->setFactory('HttpRouter', \Zend\Router\Http\HttpRouterFactory::class);
-        //$serviceLocator->setFactory(TreeRouteStack::class, \Zend\Router\Http\HttpRouterFactory::class);
-        //$serviceLocator->setFactory('RoutePluginManager', \Zend\Router\RoutePluginManagerFactory::class);
-        //$serviceLocator->setFactory(\Zend\Router\RouteStackInterface::class, \Zend\Router\RouteStackInterface::class);
+        //$serviceLocator->setFactory('HttpRouter', \Laminas\Router\Http\HttpRouterFactory::class);
+        //$serviceLocator->setFactory(TreeRouteStack::class, \Laminas\Router\Http\HttpRouterFactory::class);
+        //$serviceLocator->setFactory('RoutePluginManager', \Laminas\Router\RoutePluginManagerFactory::class);
+        //$serviceLocator->setFactory(\Laminas\Router\RouteStackInterface::class, \Laminas\Router\RouteStackInterface::class);
 
         $serviceLocator->configure($moduleConfig['service_manager']);
 

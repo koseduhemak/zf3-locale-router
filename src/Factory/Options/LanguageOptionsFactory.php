@@ -5,7 +5,7 @@ namespace LocaleRouter\Factory\Options;
 use Interop\Container\ContainerInterface;
 use LocaleRouter\Module;
 use LocaleRouter\Options\LanguageOptions;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class LanguageOptionsFactory implements FactoryInterface
 {

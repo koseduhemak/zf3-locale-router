@@ -5,17 +5,17 @@ namespace LocaleRouterTest\Strategy\Persist;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Persist\CookieStrategy;
 use PHPUnit\Framework\TestCase;
-use Zend\Http\Header\SetCookie;
-use Zend\Http\Request;
-use Zend\Http\Response;
-use Zend\Stdlib\ResponseInterface;
+use Laminas\Http\Header\SetCookie;
+use Laminas\Http\Request;
+use Laminas\Http\Response;
+use Laminas\Stdlib\ResponseInterface;
 
 class CookieStrategyTest extends TestCase
 {
     /** @var CookieStrategy */
     private $strategy;
 
-    public function setUp()
+    public function setUp() : void
     {
         $languageOptions = new LanguageOptions();
         $request         = new Request();

@@ -5,7 +5,7 @@ namespace LocaleRouter\Factory\Strategy\Extract;
 use Interop\Container\ContainerInterface;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Extract\UserIdentityStrategy;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class UserIdentityStrategyFactory implements FactoryInterface
 {

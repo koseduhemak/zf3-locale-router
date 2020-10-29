@@ -3,7 +3,7 @@
 namespace LocaleRouter\Strategy;
 
 use LocaleRouter\Factory\Strategy\AbstractExtractStrategyFactory;
-use Zend\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\AbstractPluginManager;
 
 class StrategyPluginManager extends AbstractPluginManager
 {

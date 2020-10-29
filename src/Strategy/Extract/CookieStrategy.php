@@ -3,8 +3,8 @@
 namespace LocaleRouter\Strategy\Extract;
 
 use LocaleRouter\Model\StrategyResultModel;
-use Zend\Http\Header\Cookie;
-use Zend\Stdlib\RequestInterface;
+use Laminas\Http\Header\Cookie;
+use Laminas\Stdlib\RequestInterface;
 
 class CookieStrategy extends AbstractExtractStrategy
 {

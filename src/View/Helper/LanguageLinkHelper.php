@@ -4,8 +4,8 @@ namespace LocaleRouter\View\Helper;
 
 
 use LocaleRouter\Options\LanguageOptions;
-use Zend\View\Helper\AbstractHelper;
-use Zend\View\Helper\ServerUrl;
+use Laminas\View\Helper\AbstractHelper;
+use Laminas\View\Helper\ServerUrl;
 
 class LanguageLinkHelper extends AbstractHelper
 {

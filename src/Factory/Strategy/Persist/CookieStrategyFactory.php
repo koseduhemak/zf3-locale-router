@@ -4,8 +4,8 @@ namespace LocaleRouter\Factory\Strategy\Persist;
 
 use Interop\Container\ContainerInterface;
 use LocaleRouter\Options\LanguageOptions;
-use Zend\ServiceManager\Factory\FactoryInterface;
-use Zend\Stdlib\RequestInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\Stdlib\RequestInterface;
 
 class CookieStrategyFactory implements FactoryInterface
 {

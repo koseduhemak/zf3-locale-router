@@ -5,8 +5,8 @@ namespace LocaleRouter\Strategy\Persist;
 use Doctrine\Common\Persistence\ObjectManager;
 use LocaleRouter\Entity\LocaleUserInterface;
 use LocaleRouter\Options\LanguageOptions;
-use Zend\Authentication\AuthenticationServiceInterface;
-use Zend\Stdlib\ResponseInterface;
+use Laminas\Authentication\AuthenticationServiceInterface;
+use Laminas\Stdlib\ResponseInterface;
 
 class DoctrineStrategy extends AbstractPersistStrategy
 {

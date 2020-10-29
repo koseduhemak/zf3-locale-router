@@ -5,7 +5,7 @@ namespace LocaleRouter\Factory\View\Helper;
 use Interop\Container\ContainerInterface;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\View\Helper\LanguageLinkHelper;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class LanguageLinkHelperFactory implements FactoryInterface
 {

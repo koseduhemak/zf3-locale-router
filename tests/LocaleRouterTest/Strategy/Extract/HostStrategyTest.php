@@ -7,14 +7,14 @@ use LocaleRouter\Model\StrategyResultModel;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Extract\HostStrategy;
 use PHPUnit\Framework\TestCase;
-use Zend\Http\Request;
+use Laminas\Http\Request;
 
 class HostStrategyTest extends TestCase
 {
     /** @var HostStrategy */
     private $strategy;
 
-    public function setUp()
+    public function setUp() : void
     {
         $languageOptions = new LanguageOptions();
         $this->strategy  = new HostStrategy($languageOptions);

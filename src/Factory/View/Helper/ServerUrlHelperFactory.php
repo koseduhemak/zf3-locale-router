@@ -5,7 +5,7 @@ namespace LocaleRouter\Factory\View\Helper;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\View\Helper\ServerUrlHelper;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class ServerUrlHelperFactory implements FactoryInterface
 {

@@ -3,7 +3,7 @@
 namespace LocaleRouter\Strategy\Extract;
 
 use LocaleRouter\Model\StrategyResultModel;
-use Zend\Stdlib\RequestInterface;
+use Laminas\Stdlib\RequestInterface;
 
 /**
  * This class checks whether the requested uri should deliver an asset and should therefore not be redirected.

@@ -7,7 +7,7 @@ use LocaleRouter\Mvc\Router\Http\LanguageTreeRouteStack;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Extract\ExtractStrategyInterface;
 use LocaleRouter\Strategy\StrategyPluginManager;
-use Zend\ServiceManager\Factory\DelegatorFactoryInterface;
+use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
 
 class LanguageTreeRouteStackDelegatorFactory implements DelegatorFactoryInterface
 {

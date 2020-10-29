@@ -9,15 +9,15 @@ use LocaleRouter\Strategy\Persist\DoctrineStrategy;
 use LocaleRouterTest\Mocks\EntityManagerMock;
 use LocaleRouterTest\Mocks\UserMock;
 use PHPUnit\Framework\TestCase;
-use Zend\Authentication\AuthenticationServiceInterface;
-use Zend\Http\Response;
+use Laminas\Authentication\AuthenticationServiceInterface;
+use Laminas\Http\Response;
 
 class DoctrineStrategyTest extends TestCase
 {
     /** @var DoctrineStrategy */
     private $strategy;
 
-    public function setUp()
+    public function setUp() : void
     {
         // setup mock objects
         $userMockValidLocale = new UserMock();

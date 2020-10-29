@@ -3,11 +3,11 @@
 namespace LocaleRouter;
 
 use LocaleRouter\Listener\RouteListener;
-use Zend\EventManager\EventInterface;
-use Zend\ModuleManager\Feature\BootstrapListenerInterface;
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\Mvc\MvcEvent;
-use Zend\Stdlib\ResponseInterface;
+use Laminas\EventManager\EventInterface;
+use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Stdlib\ResponseInterface;
 
 class Module implements ConfigProviderInterface, BootstrapListenerInterface
 {

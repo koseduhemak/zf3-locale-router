@@ -8,10 +8,10 @@ use LocaleRouter\Strategy\Extract\UserIdentityStrategy;
 use LocaleRouter\Strategy\Persist\DoctrineStrategy;
 use LocaleRouter\Strategy\StrategyPluginManager;
 use PHPUnit\Framework\TestCase;
-use Zend\Authentication\AuthenticationService;
-use Zend\Authentication\AuthenticationServiceInterface;
-use Zend\Router\Http\TreeRouteStack;
-use Zend\ServiceManager\ServiceManager;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Authentication\AuthenticationServiceInterface;
+use Laminas\Router\Http\TreeRouteStack;
+use Laminas\ServiceManager\ServiceManager;
 
 class FactoryTest extends TestCase
 {
@@ -21,7 +21,7 @@ class FactoryTest extends TestCase
     /** @var ServiceManager */
     protected $serviceManager;
 
-    public function setUp()
+    public function setUp() : void
     {
         $config            = include 'tests/LocaleRouterTest/Fixtures/config/application.test.config.php';
 
@@ -29,7 +29,7 @@ class FactoryTest extends TestCase
             'tests/LocaleRouterTest/Fixtures/config/{{,*.}local}.php',
         ];
 
-        $bootstrap            = \Zend\Mvc\Application::init($config);
+        $bootstrap            = \Laminas\Mvc\Application::init($config);
         $this->serviceManager = $bootstrap->getServiceManager();
     }
 
