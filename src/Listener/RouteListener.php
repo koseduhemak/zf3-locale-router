@@ -4,12 +4,12 @@ namespace LocaleRouter\Listener;
 
 use LocaleRouter\Mvc\Router\Http\LanguageTreeRouteStack;
 use LocaleRouter\Service\PersistStrategyService;
-use Zend\EventManager\AbstractListenerAggregate;
-use Zend\EventManager\EventManagerInterface;
-use Zend\I18n\Translator\TranslatorInterface;
-use Zend\Mvc\MvcEvent;
-use Zend\Router\RouteStackInterface;
-use Zend\Stdlib\RequestInterface;
+use Laminas\EventManager\AbstractListenerAggregate;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\I18n\Translator\TranslatorInterface;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Router\RouteStackInterface;
+use Laminas\Stdlib\RequestInterface;
 
 class RouteListener extends AbstractListenerAggregate
 {

@@ -4,7 +4,7 @@ namespace LocaleRouter\View\Helper;
 
 
 use LocaleRouter\Options\LanguageOptions;
-use Zend\View\Helper\AbstractHelper;
+use Laminas\View\Helper\AbstractHelper;
 
 class HreflangHelper extends AbstractHelper
 {

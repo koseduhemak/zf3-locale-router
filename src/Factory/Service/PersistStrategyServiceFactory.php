@@ -7,7 +7,7 @@ use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Service\PersistStrategyService;
 use LocaleRouter\Strategy\Persist\PersistStrategyInterface;
 use LocaleRouter\Strategy\StrategyPluginManager;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class PersistStrategyServiceFactory implements FactoryInterface
 {

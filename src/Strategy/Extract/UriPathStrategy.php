@@ -3,8 +3,8 @@
 namespace LocaleRouter\Strategy\Extract;
 
 use LocaleRouter\Model\StrategyResultModel;
-use Zend\Http\Request;
-use Zend\Stdlib\RequestInterface;
+use Laminas\Http\Request;
+use Laminas\Stdlib\RequestInterface;
 
 final class UriPathStrategy extends AbstractExtractStrategy
 {

@@ -5,7 +5,7 @@ namespace LocaleRouter\Factory\Strategy\Persist;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use LocaleRouter\Options\LanguageOptions;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class DoctrineStrategyFactory implements FactoryInterface
 {

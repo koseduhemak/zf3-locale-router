@@ -8,15 +8,15 @@ use LocaleRouter\Model\StrategyResultModel;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Extract\UserIdentityStrategy;
 use PHPUnit\Framework\TestCase;
-use Zend\Authentication\AuthenticationServiceInterface;
-use Zend\Http\Request;
+use Laminas\Authentication\AuthenticationServiceInterface;
+use Laminas\Http\Request;
 
 class UserIdentityStrategyTest extends TestCase
 {
     /** @var UserIdentityStrategy */
     private $strategy;
 
-    public function setUp()
+    public function setUp() : void
     {
         $languageOptions = new LanguageOptions();
         $this->strategy  = new UserIdentityStrategy($languageOptions);

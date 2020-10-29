@@ -3,9 +3,9 @@
 namespace LocaleRouter\View\Helper;
 
 use LocaleRouter\Options\LanguageOptions;
-use Zend\Console\Console;
+use Laminas\Console\Console;
 
-class ServerUrlHelper extends \Zend\View\Helper\ServerUrl
+class ServerUrlHelper extends \Laminas\View\Helper\ServerUrl
 {
     /** @var LanguageOptions */
     protected $options;

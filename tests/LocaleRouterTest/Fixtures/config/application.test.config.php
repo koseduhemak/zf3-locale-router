@@ -3,9 +3,9 @@
 $config = [
     // This should be an array of module namespaces used in the application.
     'modules' => [
-        'Zend\Mvc\I18n',
-        'Zend\I18n',
-        'Zend\Router',
+        'Laminas\Mvc\I18n',
+        'Laminas\I18n',
+        'Laminas\Router',
         'DoctrineModule',
         'DoctrineORMModule',
         'LocaleRouter',
@@ -56,7 +56,7 @@ $config = [
     // )
 
     // Initial configuration with which to seed the ServiceManager.
-    // Should be compatible with Zend\ServiceManager\Config.
+    // Should be compatible with Laminas\ServiceManager\Config.
     // 'service_manager' => array(),
 ];
 

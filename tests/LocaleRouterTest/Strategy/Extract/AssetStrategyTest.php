@@ -7,14 +7,14 @@ use LocaleRouter\Model\StrategyResultModel;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Extract\AssetStrategy;
 use PHPUnit\Framework\TestCase;
-use Zend\Http\Request;
+use Laminas\Http\Request;
 
 class AssetStrategyTest extends TestCase
 {
     /** @var AssetStrategy */
     private $strategy;
 
-    public function setUp()
+    public function setUp() : void
     {
         $languageOptions = new LanguageOptions();
         $this->strategy  = new AssetStrategy($languageOptions);

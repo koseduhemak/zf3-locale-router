@@ -4,7 +4,7 @@
 namespace LocaleRouter\Strategy\Persist;
 
 use LocaleRouter\Strategy\StrategyInterface;
-use Zend\Stdlib\ResponseInterface;
+use Laminas\Stdlib\ResponseInterface;
 
 interface PersistStrategyInterface extends StrategyInterface
 {

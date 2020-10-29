@@ -4,7 +4,7 @@ namespace LocaleRouter\Factory\Listener;
 
 use Interop\Container\ContainerInterface;
 use LocaleRouter\Service\PersistStrategyService;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class RouteListenerFactory implements FactoryInterface
 {

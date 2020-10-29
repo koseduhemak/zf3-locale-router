@@ -7,15 +7,15 @@ use LocaleRouter\Model\StrategyResultModel;
 use LocaleRouter\Options\LanguageOptions;
 use LocaleRouter\Strategy\Extract\HttpAcceptLanguageStrategy;
 use PHPUnit\Framework\TestCase;
-use Zend\Http\Header\AcceptLanguage;
-use Zend\Http\Request;
+use Laminas\Http\Header\AcceptLanguage;
+use Laminas\Http\Request;
 
 class HttpAcceptLanguageStrategyTest extends TestCase
 {
     /** @var HttpAcceptLanguageStrategy */
     private $strategy;
 
-    public function setUp()
+    public function setUp() : void
     {
         $languageOptions = new LanguageOptions();
         $this->strategy  = new HttpAcceptLanguageStrategy($languageOptions);
