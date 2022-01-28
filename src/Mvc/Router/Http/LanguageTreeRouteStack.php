@@ -57,7 +57,7 @@ class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
 
         $languages = $this->getRouteLanguages();
 
-        $oldBase = $this->baseUrl; // save old baseUrl
+        $oldBase = $this->baseUrl ?: ''; // save old baseUrl
         // only add language key when more than one language is supported
         if (count($languages) > 1) {
             if (isset($params['locale'])) {
@@ -105,7 +105,7 @@ class LanguageTreeRouteStack extends TranslatorAwareTreeRouteStack
             return null;
         }*/
 
-        $oldBase = $this->baseUrl;
+        $oldBase = $this->baseUrl ?: '';
 
         // set default locale
         \Locale::setDefault($this->languageOptions->getDefaultLocale());
